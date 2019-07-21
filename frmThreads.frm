@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmThreads 
+   BackColor       =   &H00302D2D&
    BorderStyle     =   0  'None
    Caption         =   "Ïß³Ì"
    ClientHeight    =   3030
@@ -19,3 +20,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Sub Form_Load()
+    Me.Caption = Lang_Threads_Caption
+End Sub

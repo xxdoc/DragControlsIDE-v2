@@ -2,12 +2,12 @@ VERSION 5.00
 Object = "{ACD4732E-2B7C-40C1-A56B-078848D41977}#1.0#0"; "Image.ocx"
 Begin VB.UserControl TabBar 
    BackColor       =   &H00302D2D&
-   ClientHeight    =   4488
+   ClientHeight    =   4485
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   7428
-   ScaleHeight     =   4488
-   ScaleWidth      =   7428
+   ClientWidth     =   7425
+   ScaleHeight     =   4485
+   ScaleWidth      =   7425
    Begin VB.Timer DropInCheck 
       Interval        =   100
       Left            =   6912
@@ -28,27 +28,13 @@ Begin VB.UserControl TabBar
       Begin VB.Timer KeyCheckTimer 
          Interval        =   10
          Left            =   6768
-         Top             =   888
+         Top             =   960
       End
       Begin VB.Timer FixPosTimer 
          Enabled         =   0   'False
          Interval        =   100
          Left            =   6768
-         Top             =   456
-      End
-      Begin VB.Label sbTip 
-         Appearance      =   0  'Flat
-         AutoSize        =   -1  'True
-         BackColor       =   &H80000005&
-         BackStyle       =   0  'Transparent
-         Caption         =   "阅读此代码将会对您的身体健康造成伤害，请立即关闭窗口。"
-         ForeColor       =   &H003954FE&
-         Height          =   240
-         Left            =   1224
-         TabIndex        =   9
-         Top             =   1752
-         Visible         =   0   'False
-         Width           =   4860
+         Top             =   480
       End
    End
    Begin VB.Frame TopBar 
@@ -69,16 +55,16 @@ Begin VB.UserControl TabBar
          Height          =   420
          Left            =   7032
          ScaleHeight     =   420
-         ScaleWidth      =   396
-         TabIndex        =   10
+         ScaleWidth      =   390
+         TabIndex        =   9
          Top             =   0
          Width           =   396
          Begin VB.Image MoreBtnIcon 
-            Height          =   132
-            Left            =   144
+            Height          =   165
+            Left            =   150
             Picture         =   "TabBar.ctx":0000
-            Top             =   144
-            Width           =   192
+            Top             =   150
+            Width           =   240
          End
       End
       Begin VB.Label DropInMark 
@@ -134,8 +120,8 @@ Begin VB.UserControl TabBar
          Top             =   96
          Visible         =   0   'False
          Width           =   252
-         _ExtentX        =   445
-         _ExtentY        =   381
+         _ExtentX        =   450
+         _ExtentY        =   370
          Image           =   "TabBar.ctx":0252
       End
       Begin VB.Label TabBg 
@@ -188,21 +174,46 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+'====================================================
+'描述:      标题栏控件
+'作者:      Error 404, 冰棍
+'文件:      TabBar.ctl
+'====================================================
+
+Event WindowDropIn(Frm As Form, Index As Integer)
+Event WindowDropOut(Frm As Form, Index As Integer)
+Event TabClick(Frm As Form, Index As Integer)
+
 Dim FocusIndex As Integer, LastMove As Integer
-Dim Windows() As Form, Styles(100000000) As Long
+Dim Windows() As Form
 Dim SrcX  As Long, SrcY As Long, DropIndex As Integer, DropMode As Long
 Dim SrcX2 As Long, SrcY2 As Long
 Dim KeyClose As Boolean
 Dim MenuTab As Integer
+'NOTE：DeleteSource - 顺便删除原窗口，默认为True。
+Public Sub RemoveFormByForm(Frm As Form, Optional DeleteSource As Boolean = True)
+    Dim i As Integer
+    For i = 1 To UBound(Windows)
+        If Windows(i) Is Frm Then
+            Call RemoveForm(i, DeleteSource)
+            Exit For
+        End If
+    Next
+End Sub
 Public Sub RemoveForm(Index As Integer, Optional DeleteSource As Boolean = True)
+    If Windows(Index) Is Nothing Then
+        Exit Sub
+    End If
+    
+    SetParent Windows(Index).hWnd, 0                            '在移除窗口前先恢复其母窗体，因为即使DeleteSource = False，窗口也会随着母窗口一起关闭
     If DeleteSource Then Unload Windows(Index)
     FixPosition Index, UBound(Windows) - 1, 1
     ReDim Preserve Windows(UBound(Windows) - 1)
-    Unload TabIcon(TabIcon.ubound)
-    Unload TabBg(TabBg.ubound)
-    Unload TabTitle(TabTitle.ubound)
-    Unload CloseButton(CloseButton.ubound)
-    Unload WindowFrame(WindowFrame.ubound)
+    Unload TabIcon(TabIcon.UBound)
+    Unload TabBg(TabBg.UBound)
+    Unload TabTitle(TabTitle.UBound)
+    Unload CloseButton(CloseButton.UBound)
+    Unload WindowFrame(WindowFrame.UBound)
     If UBound(Windows) = 0 Then
         BottomBar.Visible = False
         LastMove = 0: FocusIndex = 0
@@ -210,30 +221,31 @@ Public Sub RemoveForm(Index As Integer, Optional DeleteSource As Boolean = True)
         LastMove = 0
         If FocusIndex > UBound(Windows) Then FocusIndex = Index
         If Index > UBound(Windows) Then
-            SetFocus UBound(Windows)
+            SwitchTo UBound(Windows)
         Else
-            SetFocus Index
+            SwitchTo Index
         End If
     Else
         LastMove = 0
         If FocusIndex > UBound(Windows) Then FocusIndex = Index - 1
         If Index - 1 > UBound(Windows) Then
-            SetFocus UBound(Windows)
+            SwitchTo UBound(Windows)
         Else
-            SetFocus Index - 1
+            SwitchTo Index - 1
         End If
     End If
 End Sub
-Public Sub AddForm(frm As Form)
+
+Public Sub AddForm(Frm As Form)
     
     Dim Index As Integer
-    Index = TabBg.ubound + 1
+    Index = TabBg.UBound + 1
     
     Load TabTitle(Index)
     With TabTitle(Index)
         .Left = TabBg(Index - 1).Left + TabBg(Index - 1).Width + 16 * Screen.TwipsPerPixelX + TabIcon(Index - 1).Height
         .Top = (TopBar.Height - BottomBar.Height) / 2 - TabTitle(Index - 1).Height / 2
-        .Caption = frm.Caption
+        .Caption = Frm.Caption
         .Tag = 16 * Screen.TwipsPerPixelX + TabIcon(Index - 1).Height
         .Visible = True
     End With
@@ -254,7 +266,7 @@ Public Sub AddForm(frm As Form)
         .Top = TabTitle(Index).Top
         .Visible = True
         .ClearImage
-        .LoadImage_FromHandle SendMessageA(frm.Hwnd, WM_GETICON, ICON_BIG, 0)
+        .LoadImage_FromHandle SendMessageA(Frm.hWnd, WM_GETICON, ICON_BIG, 0)
         .Refresh
         .Width = TabTitle(Index).Height
         .Height = TabTitle(Index).Height
@@ -278,32 +290,33 @@ Public Sub AddForm(frm As Form)
     CloseButton(Index).ZOrder
     
     BottomBar.Visible = True
-    If frm.Visible = False Then frm.Show
-
-    Dim Style As Long
-    Style = GetWindowLongA(frm.Hwnd, GWL_STYLE)
-    If Not ((Style And WS_CAPTION) = WS_CAPTION) Then Debug.Print Now, "错误：请打开子窗口的标题栏。": Exit Sub
-    Styles(frm.Hwnd) = Style
-    Style = Style And (Not WS_CAPTION)
-    If (Style And WS_THICKFRAME) = WS_THICKFRAME Then Style = Style And (Not WS_THICKFRAME)
-    SetWindowLongA frm.Hwnd, GWL_STYLE, Style
+    If Frm.Visible = False Then Frm.Show
+    
+    Frm.DarkTitleBar.Visible = False
+    Frm.DarkWindowBorder.Bind = False
+    Frm.DarkWindowBorderSizer.Bind = False
+    SetWindowLongA Frm.hWnd, GWL_STYLE, GetWindowLongA(Frm.hWnd, GWL_STYLE) Or WS_CHILD
+    Call Frm.Form_Resize
     
     Load WindowFrame(Index)
     With WindowFrame(Index)
         .Left = 0
         .Top = TopBar.Height
         .Visible = True
-        .Tag = frm.Hwnd
+        .Tag = Frm.hWnd
         .ZOrder
-        SetParent frm.Hwnd, .Hwnd
+        SetParent Frm.hWnd, .hWnd
     End With
     
     ReDim Preserve Windows(UBound(Windows) + 1)
-    Set Windows(Index) = frm
+    Set Windows(Index) = Frm
     
-    SetFocus Index
+    SwitchTo Index
+    
+    RaiseEvent WindowDropIn(Windows(Index), Index)
 End Sub
-Public Sub SetFocus(Index As Integer)
+
+Public Sub SwitchTo(Index As Integer)
     TabBg(FocusIndex).BackColor = UserControl.BackColor
     TabBg(Index).BackColor = RGB(0, 122, 204)
     CloseButton(FocusIndex).BackColor = RGB(45, 45, 48)
@@ -315,12 +328,36 @@ Public Sub SetFocus(Index As Integer)
     Windows(Index).Move 0, 0, UserControl.Width, UserControl.Height - TopBar.Height
     
     FocusIndex = Index
+    
+    RaiseEvent TabClick(Windows(Index), Index)
+End Sub
+
+'描述:      切换到指定的窗口
+'参数:      TargetForm: 指定窗口
+Public Sub SwitchToByForm(TargetForm As Form)
+    Dim i   As Integer
+    For i = 1 To UBound(Windows)                                        '尝试在窗口列表里找对应的窗口
+        If Windows(i) Is TargetForm Then                                    '如果找到了就切换过去
+            Call SwitchTo(i)
+            Exit Sub
+        End If
+    Next i
+    Call AddForm(TargetForm)                                            '找不到的话就先添加对应窗口，再切换过去
+End Sub
+
+'描述:      更新所有Tab的标题
+Public Sub UpdateCaptions()
+    Dim i   As Integer
+    For i = 1 To UBound(Windows)
+        TabTitle(i).Caption = Windows(i).Caption
+    Next i
+    FixPosition2 1, UBound(Windows)
 End Sub
 
 Private Sub ClickCover_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Dim i As Integer
     DropIndex = 0
-    For i = 1 To TabBg.ubound
+    For i = 1 To TabBg.UBound
         If X >= TabBg(i).Left And X <= TabBg(i).Left + TabBg(i).Width Then
             DropIndex = i: Exit For
         End If
@@ -350,18 +387,22 @@ Private Sub ClickCover_MouseMove(Button As Integer, Shift As Integer, X As Singl
             BottomBar.BackColor = RGB(254, 84, 57)
             Dim p As POINTAPI
             GetCursorPos p
-            SetWindowPos Windows(DropIndex).Hwnd, 0, p.X - SrcX / Screen.TwipsPerPixelX, p.Y - SrcY / Screen.TwipsPerPixelY, 0, 0, SWP_NOZORDER Or SWP_NOSIZE
-            SetWindowLongA Windows(DropIndex).Hwnd, GWL_STYLE, Styles(Windows(DropIndex).Hwnd)
-            SetParent Windows(DropIndex).Hwnd, 0
+            SetWindowPos Windows(DropIndex).hWnd, 0, p.X - SrcX / Screen.TwipsPerPixelX, p.Y - SrcY / Screen.TwipsPerPixelY, 0, 0, SWP_NOZORDER Or SWP_NOSIZE
+            Windows(DropIndex).DarkTitleBar.Visible = True
+            Windows(DropIndex).DarkWindowBorder.Bind = True
+            Windows(DropIndex).DarkWindowBorderSizer.Bind = True
+            SetWindowLongA Windows(DropIndex).hWnd, GWL_STYLE, GetWindowLongA(Windows(DropIndex).hWnd, GWL_STYLE) And (Not WS_CHILD)
+            Call Windows(DropIndex).Form_Resize
+            SetParent Windows(DropIndex).hWnd, 0
             Dim rtn As Long
-            rtn = GetWindowLongA(Windows(DropIndex).Hwnd, GWL_EXSTYLE) Or WS_EX_LAYERED
-            SetWindowLongA Windows(DropIndex).Hwnd, GWL_EXSTYLE, rtn
-            SetLayeredWindowAttributes Windows(DropIndex).Hwnd, 0, 128, LWA_ALPHA
+            rtn = GetWindowLongA(Windows(DropIndex).hWnd, GWL_EXSTYLE) Or WS_EX_LAYERED
+            SetWindowLongA Windows(DropIndex).hWnd, GWL_EXSTYLE, rtn
+            SetLayeredWindowAttributes Windows(DropIndex).hWnd, 0, 128, LWA_ALPHA
             
             Sleep 100: DoEvents
             Do While DropMode = 2
                 GetCursorPos p
-                SetWindowPos Windows(DropIndex).Hwnd, 0, p.X - SrcX / Screen.TwipsPerPixelX, p.Y - SrcY / Screen.TwipsPerPixelY, 0, 0, SWP_NOZORDER Or SWP_NOSIZE
+                SetWindowPos Windows(DropIndex).hWnd, 0, p.X - SrcX / Screen.TwipsPerPixelX, p.Y - SrcY / Screen.TwipsPerPixelY, 0, 0, SWP_NOZORDER Or SWP_NOSIZE
                 Sleep 10: DoEvents
             Loop
         End If
@@ -376,16 +417,17 @@ End Sub
 
 Private Sub ClickCover_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     If DropMode = 2 Then
-        SetLayeredWindowAttributes Windows(DropIndex).Hwnd, 0, 255, LWA_ALPHA
+        SetLayeredWindowAttributes Windows(DropIndex).hWnd, 0, 255, LWA_ALPHA
+        RaiseEvent WindowDropOut(Windows(DropIndex), DropIndex)
         Dim rtn As Long
-        rtn = GetWindowLongA(Windows(DropIndex).Hwnd, GWL_EXSTYLE) And (Not WS_EX_LAYERED)
-        SetWindowLongA Windows(DropIndex).Hwnd, GWL_EXSTYLE, rtn
+        rtn = GetWindowLongA(Windows(DropIndex).hWnd, GWL_EXSTYLE) And (Not WS_EX_LAYERED)
+        SetWindowLongA Windows(DropIndex).hWnd, GWL_EXSTYLE, rtn
         RemoveForm DropIndex, False
         BottomBar.BackColor = RGB(0, 122, 204)
     End If
     
     If DropIndex <> 0 And Button = 1 Then
-        If FocusIndex <> DropIndex And DropMode = 0 Then SetFocus DropIndex
+        If FocusIndex <> DropIndex And DropMode = 0 Then SwitchTo DropIndex
         If DropMode = 1 Then
             TabTitle(DropIndex).ZOrder 1
             TabBg(DropIndex).ZOrder 1
@@ -393,11 +435,11 @@ Private Sub ClickCover_MouseUp(Button As Integer, Shift As Integer, X As Single,
             Dim i As Integer, NewIndex As Integer
             NewIndex = DropIndex
             If X < 0 Then
-                NewIndex = 0
+                NewIndex = 1
             ElseIf X > UserControl.Width And TabBg(UBound(Windows)).Left + TabBg(UBound(Windows)).Width < UserControl.Width Then
                 NewIndex = UBound(Windows)
             Else
-                For i = 1 To TabBg.ubound
+                For i = 1 To TabBg.UBound
                     If X >= TabBg(i).Left And X <= TabBg(i).Left + TabBg(i).Width And i <> DropIndex Then NewIndex = i: Exit For
                 Next
             End If
@@ -408,32 +450,32 @@ Private Sub ClickCover_MouseUp(Button As Integer, Shift As Integer, X As Single,
                 If NewIndex < DropIndex Then
                     For i = DropIndex To NewIndex + 1 Step -1
                         Set Windows(i) = Windows(i - 1)
-                        SetParent Windows(i).Hwnd, WindowFrame(i).Hwnd
+                        SetParent Windows(i).hWnd, WindowFrame(i).hWnd
                         TabTitle(i).Caption = Windows(i).Caption
                     Next
                 Else
                     For i = DropIndex To NewIndex - 1
                         Set Windows(i) = Windows(i + 1)
-                        SetParent Windows(i).Hwnd, WindowFrame(i).Hwnd
+                        SetParent Windows(i).hWnd, WindowFrame(i).hWnd
                         TabTitle(i).Caption = Windows(i).Caption
                     Next
                 End If
                 Set Windows(NewIndex) = tempW
                 TabTitle(NewIndex).Caption = Windows(NewIndex).Caption
-                SetParent Windows(NewIndex).Hwnd, WindowFrame(NewIndex).Hwnd
+                SetParent Windows(NewIndex).hWnd, WindowFrame(NewIndex).hWnd
             End If
             If NewIndex < DropIndex Then
                 FixPosition2 NewIndex, DropIndex
             Else
                 FixPosition2 DropIndex, NewIndex
             End If
-            SetFocus NewIndex
+            SwitchTo NewIndex
         End If
     End If
     
     SrcX = 0: SrcY = 0: SrcX2 = 0: SrcY2 = 0
     
-    DropMode = 0
+    DropMode = 0: DropIndex = 0
 End Sub
 
 Private Sub CloseButton_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -446,6 +488,7 @@ Private Sub CloseButton_MouseUp(Index As Integer, Button As Integer, Shift As In
         RemoveForm Index
     End If
 End Sub
+
 Private Sub FixPosition(StartPos As Integer, EndPos As Integer, Step As Integer)
     Dim cx As Long
     For i = StartPos To EndPos
@@ -457,11 +500,12 @@ Private Sub FixPosition(StartPos As Integer, EndPos As Integer, Step As Integer)
         CloseButton(i).Left = CloseButton(i + Step).Left - cx
         TabTitle(i).Caption = TabTitle(i + Step).Caption
         TabBg(i).Width = TabBg(i + Step).Width
-        TabIcon(i).LoadImage_FromHandle SendMessageA(Windows(i).Hwnd, WM_GETICON, ICON_BIG, 0)
-        SetParent Windows(i).Hwnd, WindowFrame(i).Hwnd
+        TabIcon(i).LoadImage_FromHandle SendMessageA(Windows(i).hWnd, WM_GETICON, ICON_BIG, 0)
+        SetParent Windows(i).hWnd, WindowFrame(i).hWnd
         CloseButton(i).Tag = CloseButton(i).Left - TabBg(i).Left
     Next
 End Sub
+
 Private Sub FixPosition2(StartPos As Integer, EndPos As Integer)
     Dim cx As Long
     For i = StartPos To EndPos
@@ -471,7 +515,7 @@ Private Sub FixPosition2(StartPos As Integer, EndPos As Integer)
         TabBg(i).Width = TabTitle(i).Width + TabTitle(i).Height * 2 + 38 * Screen.TwipsPerPixelX
         CloseButton(i).Left = TabBg(i).Left + 30 * Screen.TwipsPerPixelX + TabTitle(i).Width + TabIcon(i).Width
         CloseButton(i).Tag = CloseButton(i).Left - TabBg(i).Left
-        TabIcon(i).LoadImage_FromHandle SendMessageA(Windows(i).Hwnd, WM_GETICON, ICON_BIG, 0)
+        TabIcon(i).LoadImage_FromHandle SendMessageA(Windows(i).hWnd, WM_GETICON, ICON_BIG, 0)
     Next
 End Sub
 
@@ -485,54 +529,71 @@ Private Sub cmdMoveOut_Click()
     If MenuTab = 0 Then Exit Sub
     Dim p As POINTAPI
     GetCursorPos p
-    SetWindowPos Windows(MenuTab).Hwnd, 0, p.X, p.Y, 0, 0, SWP_NOZORDER Or SWP_NOSIZE
-    SetWindowLongA Windows(MenuTab).Hwnd, GWL_STYLE, Styles(Windows(MenuTab).Hwnd)
-    SetParent Windows(MenuTab).Hwnd, 0
+    SetWindowPos Windows(MenuTab).hWnd, 0, p.X, p.Y, 0, 0, SWP_NOZORDER Or SWP_NOSIZE
+    SetParent Windows(MenuTab).hWnd, 0
+    RaiseEvent WindowDropOut(Windows(MenuTab), MenuTab)
     RemoveForm MenuTab, False
     MenuTab = 0
 End Sub
 
 Private Sub DropInCheck_Timer()
-    Dim Hwnd As Long, MBtn As Boolean, Style As Long
-    Hwnd = GetActiveWindow
-    If Hwnd = 0 Then Exit Sub
+    If Not Ambient.UserMode Then
+        UserControl.DropInCheck.Enabled = False
+    End If
+    
+    If UserControl.Extender.Visible = False Then Exit Sub
+    
+    Dim hWnd As Long, MBtn As Boolean
+    hWnd = GetActiveWindow
+    If hWnd = 0 Then Exit Sub
     If DropMode = 2 Then Exit Sub
     
     MBtn = (GetAsyncKeyState(VK_LBUTTON) <> 0)
     
     If Not MBtn Then Exit Sub
     
-    Style = GetWindowLongA(Hwnd, GWL_STYLE)
-    
-    If Not ((Style And WS_CAPTION) = WS_CAPTION) Then Exit Sub
-    
     Dim r As RECT, p As POINTAPI
-    GetWindowRect Hwnd, r
+    GetWindowRect hWnd, r
     GetCursorPos p
     
-    If Not (p.X >= r.Left And p.X <= r.Right And p.Y >= r.Top And p.Y - r.Top <= 27 * (15 / Screen.TwipsPerPixelY)) Then Exit Sub
+    If Not (p.X >= r.Left And p.X <= r.Right And p.Y >= r.Top And p.Y - r.Top <= 33 * (15 / Screen.TwipsPerPixelY)) Then Exit Sub
     
-    GetWindowRect UserControl.Hwnd, r
+    GetWindowRect UserControl.hWnd, r
     
-    If Not (p.Y >= r.Top And p.Y <= r.Top + TopBar.Height / Screen.TwipsPerPixelY) Then Exit Sub
+    If Not (p.Y >= r.Top And p.Y <= r.Top + TopBar.Height / Screen.TwipsPerPixelY And p.X >= r.Left And p.X <= r.Right) Then Exit Sub
+    
+    Dim Frm As Form, DropForm As Form
+    
+    For Each Frm In VB.Forms
+        If Frm.hWnd = hWnd Then Set DropForm = Frm: Exit For
+    Next
+    
+    If DropForm Is Nothing Then Exit Sub
+    On Error GoTo FailRead
+    If DropForm.DarkTitleBar Is Nothing Then Exit Sub
+    GoTo SuccessRead
+    
+FailRead:
+    Exit Sub
+SuccessRead:
     
     Dim X As Single
     
     BottomBar.BackColor = RGB(254, 84, 57)
     
     Dim rtn As Long
-    rtn = GetWindowLongA(Hwnd, GWL_EXSTYLE) Or WS_EX_LAYERED
-    SetWindowLongA Hwnd, GWL_EXSTYLE, rtn
-    SetLayeredWindowAttributes Hwnd, 0, 100, LWA_ALPHA
+    rtn = GetWindowLongA(hWnd, GWL_EXSTYLE) Or WS_EX_LAYERED
+    SetWindowLongA hWnd, GWL_EXSTYLE, rtn
+    SetLayeredWindowAttributes hWnd, 0, 100, LWA_ALPHA
     
     DropInMark.Visible = True
     DropInMark.ZOrder
     
-    Dim text As String * 255
-    GetWindowTextA Hwnd, text, 255
-    DropInMark.Caption = "*" & text
+    Dim Text As String * 255
+    GetWindowTextA hWnd, Text, 255
+    DropInMark.Caption = "*" & Text
     DropInMark.ForeColor = RGB(255, 255, 255)
-    DropInMark.Width = Len(DropInMark.Caption) * DropInMark.FontSize * Screen.TwipsPerPixelX + 20 * Screen.TwipsPerPixelX
+    DropInMark.Width = Len(DropInMark.Caption) * DropInMark.FontSize * Screen.TwipsPerPixelX + 50 * Screen.TwipsPerPixelX
     
     Do While MBtn
         GetCursorPos p
@@ -542,37 +603,42 @@ Private Sub DropInCheck_Timer()
         Sleep 10: DoEvents
     Loop
     
-    SetLayeredWindowAttributes Hwnd, 0, 255, LWA_ALPHA
+    SetLayeredWindowAttributes hWnd, 0, 255, LWA_ALPHA
     rtn = rtn And (Not WS_EX_LAYERED)
-    SetWindowLongA Hwnd, GWL_EXSTYLE, rtn
+    SetWindowLongA hWnd, GWL_EXSTYLE, rtn
     
     BottomBar.BackColor = RGB(0, 122, 204)
     DropInMark.Visible = False
     
     If X < 0 Or X > UserControl.Width Then Exit Sub
     
-    Dim frm As Form
-    
-    For Each frm In VB.Forms
-        If frm.Hwnd = Hwnd Then
-            AddForm frm
-            'Cheat
-            DropMode = 1: DropIndex = UBound(Windows)
-            Call ClickCover_MouseUp(1, 0, X, 0)
-            Exit For
-        End If
-    Next
+    AddForm DropForm
+    'Cheat
+    DropMode = 1: DropIndex = UBound(Windows)
+    Call ClickCover_MouseUp(1, 0, X, 0)
     
     UserControl.SetFocus
     FixPosTimer.Enabled = True
 End Sub
 
 Private Sub FixPosTimer_Timer()
-    SetFocus FocusIndex
+    If Not Ambient.UserMode Then
+        UserControl.FixPosTimer.Enabled = False
+    End If
+    
+    SwitchTo FocusIndex
     FixPosTimer.Enabled = False
 End Sub
 
 Private Sub KeyCheckTimer_Timer()
+    If Not Ambient.UserMode Then
+        UserControl.KeyCheckTimer.Enabled = False
+    End If
+    
+    If UserControl.Extender.Visible = False Then Exit Sub
+    
+    If GetActiveWindow = 0 Then Exit Sub
+
     If (GetAsyncKeyState(VK_CONTROL) <> 0) And (GetAsyncKeyState(VK_W) <> 0) Then
         If Not KeyClose Then
             KeyClose = True
@@ -587,8 +653,8 @@ Private Sub MoreBtn_Click()
     If UBound(Windows) = 0 Then Exit Sub
     
     UserControl.TabItem(0).Visible = True
-    If UserControl.TabItem.ubound > 0 Then
-        For i = 1 To UserControl.TabItem.ubound
+    If UserControl.TabItem.UBound > 0 Then
+        For i = 1 To UserControl.TabItem.UBound
             Unload UserControl.TabItem(i)
         Next
     End If
@@ -615,7 +681,7 @@ End Sub
 
 Private Sub TabItem_Click(Index As Integer)
     If Index > UBound(Windows) Then Exit Sub
-    SetFocus Index
+    SwitchTo Index
 End Sub
 
 Private Sub UserControl_Initialize()
@@ -624,6 +690,8 @@ Private Sub UserControl_Initialize()
 End Sub
 
 Private Sub UserControl_Resize()
+    On Error Resume Next
+    
     BottomBar.Height = 3 * Screen.TwipsPerPixelY
     BottomBar.Width = UserControl.Width
     TopBar.Width = UserControl.Width
@@ -644,4 +712,3 @@ Private Sub UserControl_Resize()
     WindowFrame(FocusIndex).Height = UserControl.Height - TopBar.Height
     Windows(FocusIndex).Move 0, 0, UserControl.Width, UserControl.Height - TopBar.Height
 End Sub
-

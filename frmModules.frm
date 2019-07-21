@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmModules 
+   BackColor       =   &H00302D2D&
    BorderStyle     =   0  'None
    Caption         =   "Ä£¿é"
    ClientHeight    =   3030
@@ -19,3 +20,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Sub Form_Load()
+    Me.Caption = Lang_Modules_Caption
+End Sub

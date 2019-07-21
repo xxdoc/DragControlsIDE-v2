@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmCallStack 
+   BackColor       =   &H00302D2D&
    BorderStyle     =   0  'None
    Caption         =   "µ÷ÓÃ¶ÑÕ»"
    ClientHeight    =   3030
@@ -19,3 +20,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Sub Form_Load()
+    Me.Caption = Lang_CallStack_Caption
+End Sub

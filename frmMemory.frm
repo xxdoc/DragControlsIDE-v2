@@ -1,5 +1,6 @@
 VERSION 5.00
 Begin VB.Form frmMemory 
+   BackColor       =   &H00302D2D&
    BorderStyle     =   0  'None
    Caption         =   "ÄÚ´æ"
    ClientHeight    =   3030
@@ -19,3 +20,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Sub Form_Load()
+    Me.Caption = Lang_Memory_Caption
+End Sub

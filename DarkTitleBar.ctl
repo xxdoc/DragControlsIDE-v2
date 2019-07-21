@@ -10,14 +10,14 @@ Begin VB.UserControl DarkTitleBar
    ScaleWidth      =   5370
    ToolboxBitmap   =   "DarkTitleBar.ctx":0000
    Begin DragControlsIDE.DarkMenu mnuPopup 
-      Height          =   315
-      Left            =   120
+      Height          =   345
+      Left            =   240
       TabIndex        =   4
       Top             =   600
       Visible         =   0   'False
-      Width           =   2775
-      _ExtentX        =   4895
-      _ExtentY        =   556
+      Width           =   2535
+      _ExtentX        =   4471
+      _ExtentY        =   609
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Microsoft YaHei UI"
          Size            =   9.75
@@ -37,6 +37,7 @@ Begin VB.UserControl DarkTitleBar
       MenuID_1        =   0
       MenuText_1      =   "Popup"
       MenuVisible_1   =   -1  'True
+      MenuIcon_1      =   "DarkTitleBar.ctx":0312
       SUBMENU_ITEM_COUNT_1=   5
       SubMenuID_1_0   =   0
       SubMenuText_1_1 =   "还原"
@@ -51,28 +52,28 @@ Begin VB.UserControl DarkTitleBar
       SubMenuID_1_5   =   6
       MenuID_2        =   1
       MenuText_2      =   "还原"
-      MenuEnabled_2   =   0   'False
       MenuVisible_2   =   -1  'True
-      MenuIcon_2      =   "DarkTitleBar.ctx":0312
+      MenuIcon_2      =   "DarkTitleBar.ctx":032A
       SubMenuID_2_0   =   0
       MenuID_3        =   2
       MenuText_3      =   "最大化"
       MenuVisible_3   =   -1  'True
-      MenuIcon_3      =   "DarkTitleBar.ctx":04D8
+      MenuIcon_3      =   "DarkTitleBar.ctx":1009
       SubMenuID_3_0   =   0
       MenuID_4        =   3
       MenuText_4      =   "最小化"
       MenuVisible_4   =   -1  'True
-      MenuIcon_4      =   "DarkTitleBar.ctx":069E
+      MenuIcon_4      =   "DarkTitleBar.ctx":1CE8
       SubMenuID_4_0   =   0
       MenuID_5        =   4
       MenuText_5      =   "-"
       MenuVisible_5   =   -1  'True
+      MenuIcon_5      =   "DarkTitleBar.ctx":29C7
       SubMenuID_5_0   =   0
       MenuID_6        =   5
       MenuText_6      =   "关闭"
       MenuVisible_6   =   -1  'True
-      MenuIcon_6      =   "DarkTitleBar.ctx":0864
+      MenuIcon_6      =   "DarkTitleBar.ctx":29DF
       SubMenuID_6_0   =   0
    End
    Begin VB.Timer tmrCheckFocus 
@@ -90,9 +91,10 @@ Begin VB.UserControl DarkTitleBar
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
-      Image           =   "DarkTitleBar.ctx":0A2A
+      Image           =   "DarkTitleBar.ctx":36BE
       Focusable       =   0   'False
       HasBorder       =   0   'False
+      Caption         =   ""
    End
    Begin DragControlsIDE.DarkImageButton cmdMax 
       Height          =   480
@@ -104,9 +106,10 @@ Begin VB.UserControl DarkTitleBar
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
-      Image           =   "DarkTitleBar.ctx":1709
+      Image           =   "DarkTitleBar.ctx":439D
       Focusable       =   0   'False
       HasBorder       =   0   'False
+      Caption         =   ""
    End
    Begin DragControlsIDE.DarkImageButton cmdClose 
       Height          =   480
@@ -118,14 +121,15 @@ Begin VB.UserControl DarkTitleBar
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
-      Image           =   "DarkTitleBar.ctx":23E8
+      Image           =   "DarkTitleBar.ctx":507C
       Focusable       =   0   'False
       HasBorder       =   0   'False
+      Caption         =   ""
    End
    Begin VB.Image imgMax 
       Height          =   480
       Left            =   4320
-      Picture         =   "DarkTitleBar.ctx":30C7
+      Picture         =   "DarkTitleBar.ctx":5D5B
       Top             =   480
       Visible         =   0   'False
       Width           =   480
@@ -133,7 +137,7 @@ Begin VB.UserControl DarkTitleBar
    Begin VB.Image imgRestore 
       Height          =   480
       Left            =   4800
-      Picture         =   "DarkTitleBar.ctx":3D91
+      Picture         =   "DarkTitleBar.ctx":6A25
       Top             =   480
       Visible         =   0   'False
       Width           =   480
@@ -161,7 +165,7 @@ Begin VB.UserControl DarkTitleBar
    Begin VB.Image imgIcon 
       Height          =   480
       Left            =   0
-      Picture         =   "DarkTitleBar.ctx":4A5B
+      Picture         =   "DarkTitleBar.ctx":76EF
       Top             =   0
       Width           =   480
    End
@@ -187,7 +191,9 @@ Private Const SZ_MARGIN = 30
 'Default Property Values:
 Const m_def_BindCaption = 0
 'Property Variables:
-Dim m_BindCaption As Boolean
+Dim m_BindCaption   As Boolean
+Dim MinVisible      As Boolean
+Dim MaxVisible      As Boolean
 
 Private Sub cmdClose_Click()
     Unload UserControl.Parent
@@ -200,11 +206,11 @@ Private Sub cmdMax_Click()
     GetWindowPlacement UserControl.Parent.hWnd, wp
     If wp.ShowCmd = SW_MAXIMIZE Then
         ShowWindow UserControl.Parent.hWnd, SW_RESTORE
-        UserControl.cmdMax.ToolTipText = "最大化"
+        UserControl.cmdMax.ToolTipText = Lang_TitleBar_Max
         Set UserControl.cmdMax.Picture = UserControl.imgMax.Picture
     Else
         ShowWindow UserControl.Parent.hWnd, SW_MAXIMIZE
-        UserControl.cmdMax.ToolTipText = "还原"
+        UserControl.cmdMax.ToolTipText = Lang_TitleBar_Restore
         Set UserControl.cmdMax.Picture = UserControl.imgRestore.Picture
     End If
 End Sub
@@ -302,6 +308,15 @@ Private Sub UserControl_MouseDown(Button As Integer, Shift As Integer, X As Sing
 End Sub
 
 Private Sub UserControl_Initialize()
+    UserControl.cmdClose.ToolTipText = Lang_TitleBar_Close
+    UserControl.cmdMax.ToolTipText = Lang_TitleBar_Max
+    UserControl.cmdMin.ToolTipText = Lang_TitleBar_Min
+    UserControl.mnuPopup.MenuText(1) = Lang_TitleBar_Restore
+    UserControl.mnuPopup.MenuText(2) = Lang_TitleBar_Max
+    UserControl.mnuPopup.MenuText(3) = Lang_TitleBar_Min
+    UserControl.mnuPopup.MenuText(5) = Lang_TitleBar_Close
+    '----------------------------------
+    
     Call UserControl_Resize
 End Sub
 
@@ -326,10 +341,10 @@ Private Sub UserControl_Resize()
     
     GetWindowPlacement UserControl.Parent.hWnd, wp
     If wp.ShowCmd = SW_MAXIMIZE Then
-        UserControl.cmdMax.ToolTipText = "还原"
+        UserControl.cmdMax.ToolTipText = Lang_TitleBar_Restore
         Set UserControl.cmdMax.Picture = UserControl.imgRestore.Picture
     Else
-        UserControl.cmdMax.ToolTipText = "最大化"
+        UserControl.cmdMax.ToolTipText = Lang_TitleBar_Max
         Set UserControl.cmdMax.Picture = UserControl.imgMax.Picture
     End If
 End Sub
@@ -337,7 +352,6 @@ End Sub
 'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
 'MappingInfo=UserControl,UserControl,-1,Enabled
 Public Property Get Enabled() As Boolean
-Attribute Enabled.VB_Description = "Returns/sets a value that determines whether an object can respond to user-generated events."
     Enabled = UserControl.Enabled
 End Property
 
@@ -349,8 +363,6 @@ End Property
 'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
 'MappingInfo=labTip,labTip,-1,Font
 Public Property Get Font() As Font
-Attribute Font.VB_Description = "Returns a Font object."
-Attribute Font.VB_UserMemId = -512
     Set Font = labTip.Font
 End Property
 
@@ -362,7 +374,6 @@ End Property
 'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
 'MappingInfo=labTip,labTip,-1,Caption
 Public Property Get Caption() As String
-Attribute Caption.VB_Description = "Returns/sets the text displayed in an object's title bar or below an object's icon."
     Caption = labTip.Caption
 End Property
 
@@ -383,6 +394,18 @@ Public Property Let MaxButtonEnabled(ByVal New_MaxButtonEnabled As Boolean)
 End Property
 
 'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
+'MappingInfo=cmdMax,cmdMax,-1,Visible
+Public Property Get MaxButtonVisible() As Boolean
+    MaxButtonVisible = UserControl.cmdMax.Visible
+End Property
+
+Public Property Let MaxButtonVisible(ByVal New_MaxButtonVisible As Boolean)
+    UserControl.cmdMax.Visible = New_MaxButtonVisible
+    MaxVisible = New_MaxButtonVisible
+    PropertyChanged "MaxButtonVisible"
+End Property
+
+'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
 'MappingInfo=cmdMin,cmdMin,-1,Enabled
 Public Property Get MinButtonEnabled() As Boolean
     MinButtonEnabled = cmdMin.Enabled
@@ -391,6 +414,18 @@ End Property
 Public Property Let MinButtonEnabled(ByVal New_MinButtonEnabled As Boolean)
     cmdMin.Enabled() = New_MinButtonEnabled
     PropertyChanged "MinButtonEnabled"
+End Property
+
+'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
+'MappingInfo=cmdMin,cmdMin,-1,Visible
+Public Property Get MinButtonVisible() As Boolean
+    MinButtonVisible = UserControl.cmdMin.Visible
+End Property
+
+Public Property Let MinButtonVisible(ByVal New_MinButtonVisible As Boolean)
+    UserControl.cmdMin.Visible = New_MinButtonVisible
+    MinVisible = New_MinButtonVisible
+    PropertyChanged "MinButtonVisible"
 End Property
 
 'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
@@ -411,6 +446,10 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     labTip.Caption = PropBag.ReadProperty("Caption", "Dark♂TitleBar")
     cmdMax.Enabled = PropBag.ReadProperty("MaxButtonEnabled", True)
     cmdMin.Enabled = PropBag.ReadProperty("MinButtonEnabled", True)
+    cmdMax.Visible = PropBag.ReadProperty("MaxButtonVisible", True)
+    MaxVisible = cmdMax.Visible
+    cmdMin.Visible = PropBag.ReadProperty("MinButtonVisible", True)
+    MinVisible = cmdMin.Visible
     cmdClose.Enabled = PropBag.ReadProperty("CloseButtonEnabled", True)
     m_BindCaption = PropBag.ReadProperty("BindCaption", m_def_BindCaption)
     Set Picture = PropBag.ReadProperty("Picture", Nothing)
@@ -425,6 +464,8 @@ Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
     Call PropBag.WriteProperty("Caption", labTip.Caption, "Dark♂TitleBar")
     Call PropBag.WriteProperty("MaxButtonEnabled", cmdMax.Enabled, True)
     Call PropBag.WriteProperty("MinButtonEnabled", cmdMin.Enabled, True)
+    Call PropBag.WriteProperty("MaxButtonVisible", MaxVisible, True)
+    Call PropBag.WriteProperty("MinButtonVisible", MinVisible, True)
     Call PropBag.WriteProperty("CloseButtonEnabled", cmdClose.Enabled, True)
     Call PropBag.WriteProperty("BindCaption", m_BindCaption, m_def_BindCaption)
     Call PropBag.WriteProperty("Picture", Picture, Nothing)
@@ -433,7 +474,6 @@ End Sub
 'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
 'MemberInfo=0,0,0,0
 Public Property Get BindCaption() As Boolean
-Attribute BindCaption.VB_Description = "Return/Sets if the title changes with the parent window automatically"
     BindCaption = m_BindCaption
 End Property
 
@@ -450,7 +490,6 @@ End Sub
 'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!
 'MappingInfo=imgIcon,imgIcon,-1,Picture
 Public Property Get Picture() As Picture
-Attribute Picture.VB_Description = "Returns/sets a graphic to be displayed in a control."
     Set Picture = imgIcon.Picture
 End Property
 
@@ -458,4 +497,6 @@ Public Property Set Picture(ByVal New_Picture As Picture)
     Set imgIcon.Picture = New_Picture
     PropertyChanged "Picture"
 End Property
+
+
 

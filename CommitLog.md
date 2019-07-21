@@ -1,8 +1,162 @@
 【日志】
 
+# 2019.7.21
+
+大幅删改ListView的代码。由于有皮肤控件帮忙，ListView可以更优雅的实现，于是去除所有不必要的控件和代码。另外把该控件的hWnd变量重命名为了lvHwnd。~~mmp是谁这样子起变量名的！！！让我发现不打死他！好像是自己起的哦...~~
+
+把代码框左边的侧边栏去掉，并换成图片框控件。因为这个天杀的代码框居然没有提供获取断点的接口！！！我去年买了个表看样子要自己实现下断点的功能了。
+
+优化用户体验，包括显示frmCreateOptions的时候让edProjectName获取焦点，自动生成WinMain代码的时候自动#include <windows.h>
+
+为DarkVScrollBar控件的Public Property Let BarHeight添加了On Error Resume Next，因为有一定的出错几率。
+
+TabBar现在会为子窗体添加WS_CHILD样式，使母窗体不失去焦点。
+
+运行前的保存提示考虑工程文件。
+
+gdb在附加进程前先发送`file 【待调试进程】`加载符号和`set pagination off`关闭gdb的"Type to continue, or q to quit"消息。
+
+在主窗体的QueryUnload事件中添加隐藏菜单的代码，因为发现有一定的几率即使主窗体关闭后菜单也没被隐藏。
+
+调整主窗体的QueryUnload事件中恢复窗口子类化的顺序，因为有时候会取消掉窗口关闭。
+
+添加保存专用的代码文件信息结构和工程文件结构。
+
+# 2019.7.20
+
+把DarkComboBox的Image控件换成PNG控件，因为Image控件的颜色会被皮肤控件影响。
+
+为TreeView添加了TVS_HASLINES样式。
+
+把TabBar控件的SetFocus方法重命名为SwitchTo。
+
+为TabBar控件添加SwitchToByForm方法，使TabBar能够切换到指定的窗口。
+
+为TabBar控件添加UpdateCaptions方法，使TabBar能够更新所有窗口的标题。
+
+添加了Win32Api.tlb文件到目录里。
+
+clsPipe.cls里DosOutput的EndingStr参数说明之前忘记写了，现在补上。
+
+把所有字符串常量都换成了变量，为之后切换语言的功能做准备。
+
+把加载语言、显示Logo的代码放到了frmMain的Initialize事件中，因为语言必须比用户控件更早加载。
+
+在创建工程后把工程文件标记为已更改。
+
+把工程资源管理器里的“工程”替换成了当前工程的名称，并支持重命名。重命名文件的时候会自动选择“.”前面的字符串。
+
+frmCreateOptions里的edProjectName文本框响应回车键。
+
+frmCreateOptions在Load的时候不关闭皮肤，改成显示选择目录对话框的时候才关闭皮肤，选择完目录之后就立即恢复皮肤。
+
+_保存工程的代码尚未编写！_
+
+处理了gdb附加进程失败的情况。
+
+处理了加载皮肤失败的清空。
+
+为LoadLanguage函数添加了一个可选参数LoadMenuTextOnly，因为加载语言需要分成两步进行，首先在frmMain的Initialize事件中加载各种字符串，然后再在frmMain的Load事件中加载所有菜单语言。
+
+# 2019.7.12
+
+拖延了好几天（啊啊啊最近好忙），终于merge了404的pr...感谢404~
+
+把按钮控件的AutoRedraw设置成True，避免按钮闪烁。
+
+TabBar控件添加RemoveFormByForm方法。
+
+# 2019.7.7
+
+为DarkTitleBar添加了MinVisible和MaxVisible属性，可以选择隐藏最大、最小化按钮。如果有点Bug，有时候运行之后最大、最小化按钮就会自己隐藏，不知道为啥，也修不好，所以干脆运行时用代码设置算了。
+
+完善DarkTreeView，有时使用SendMessageA没有以ByVal传参数，导致执行失败。现在已改成以ByVal方式传参数。
+
+为DarkTreeView的UserControl_Resize添加修改树视图颜色的代码，使树视图不会被该死的皮肤控件改成难看的颜色。
+
+修复TabBar的WindowDropOut事件不被触发的问题。
+
+添加了全局变量IsExiting，该变量在退出时被设为True，一些窗体（如代码框）在关闭时检测到该变量为True时才会关闭，否则只是隐藏。
+
+把frmCreate的大部分代码放到frmCreateOptions，因为frmCreateOptions会提供选项给用户设置，包括工程名称、路径等选项。
+
+改进一些用户体验，如把MsgBox函数改成无皮肤的NoSkinMsgBox函数、frmCreate frmCreateOptions响应Esc键等、代码窗口拖出拖入的时候会获取焦点。
+
+修复frmMain的Enabled设置成False时能调整大小的问题。（因为忘记设置frmMain.DarkWindowBorderSizer.Bind属性）
+
+编写了frmCreateOptions窗体的代码。
+
+添加frmMain的mnuSave_Click过程，该过程遍历CurrentProject.Files数组并保存所有标记为未保存的代码文件。
+
+把编译相关的代码中有关部分当前工程的路径和名称。
+
+把显示启动界面的过程单独写成一个过程ShowStartupPage。
+
+为frmSolutionExplorer里的树视图添加双击代码，这部分代码会通过搜索TvItemBinding数组中匹配的树视图列表项句柄，从而确定列表项对应的文件序号，使列表项双击的时候会显示对应的代码（可能存在Bug）。
+
+现在不直接操作frmCodeWindow，而是通过CreateNewCodeWindow函数来创建一个新的frmCodeWindow，再对创建的对象进行操作。因为CreateNewCodeWindow函数会往CodeWindows集合中添加新加的frmCodeWindow对象，使SourceFile结构中的TargetWindow能与其绑定。
+
+编写ShowSave和ShowOpen函数，分别用来显示保存和加载通用对话框。通用对话框疑似会遭到皮肤重绘毒手，但是编译之后似乎又不会。所以暂时先不管吧。
+
+初步定义工程各文件的信息结构雏形，包括工程主文件、工程代码文件等。
+
+# 2019.7.3
+
+移除了不同模块重复声明的一些API和函数，并把重复的操作改成子过程，让代码没这么臃肿。
+
+添加了DarkTreeView控件，TreeView纯API创建的，一是不想又加多个ocx，二是VB6的TreeView控件会被皮肤控件画坏掉，用不成。由于TreeView是自制的，一定有许多功能，以及稳定性上不及VB6的TreeView控件。如果有发现我的TreeView有Bug，或者有什么需要改进的地方请告诉我。
+
+我自制的TreeView控件的事件触发跟别的用户控件不一样，他的事件是直接通过子类化触发的，也就是说控件里面声明的Event实际上只是空壳。因为我技术实在欠佳，没有好的方式从子类化触发事件。我看到很多高手都是用Thunk的方式来写用户控件子类化的，不过我的水平远不及他们，实在是写不出o(╥﹏╥)o
+
+在frmSolutionExplorer中添加了TreeView的所有事件。
+
+优化了cmdNewPlainCpp_Click中代码的执行顺序，并在添加了操作TreeView的代码。
+
+在OutputLog过程中添加了把光标移到结尾。
+
+把ObjPtr(Me)改成了ObjPtr(WindowObj)，虽然效果一样，不过我认为这样更利于理解代码。
+
+# 2019.7.2
+
+为TabBar控件的Resize事件加了On Error Resume Next，因为有时候调整大小的时候会出错。
+
+添加了管道类，用来获取DOS程序的输出。
+
+添加检测指定进程是否存在的函数：ProcessExists
+
+为frmOutput添加了文本框和OutputLog过程。
+
+为frmPopupMenu的AddItems过程加了On Error Resume Next，暴力解决烦人的“表达式太复杂”错误（编译之后不会这样）。
+
+修复主页面的排版，预留空位给工具栏。
+
+主程序添加“运行”菜单的代码，尝试使用g++进行编译代码框里的代码，并使用管道获取其输出；并运行编译后的程序，用gdb进行附加。目前效果良好，不过尚未编写gdb调试相关的代码。想要试这个功能：新建空白C++程序→打代码→调试菜单→运行。
+
+# ~~2019.6.31~~ 2019.7.1
+
+优化窗口子类化，使其能适用于不同的窗口。窗口先用ObjPtr记录自身Object的地址，子类化通过获取这个Object来卸载窗体。
+
+改进了ImageButton，现在支持图片加文本。
+
+采用优化后的窗口子类化，修复了代码窗体最大化时全屏，以及代码窗体不能通过任务栏关闭的问题。
+
 # 2019.6.30
 
+主工程:
+
 菜单位图现支持PNG。404可以尽情发挥了。
+
+添加资源文件编译需要用到的头文件，路径为GCC\include\res。
+
+极度（找不到适合的词汇）感谢404！！！~~抛弃~~搁置MuingIII，任劳任怨地帮我弄了这个漂亮的TabBar！！
+
+IceControls:
+
+添加了CtlBasic类和IceWindow类（没写多少）。
+
+debug_build.bat:
+
+修改了编译命令，现在会先编译资源文件，再编译exe。
 
 # 2019.6.29
 
