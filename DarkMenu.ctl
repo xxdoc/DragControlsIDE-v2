@@ -223,7 +223,9 @@ Public Sub HideMenu(Optional HideFromSubMenu As Boolean = False)
 End Sub
 
 'Please note that the parameter 'ClickedFromRootItem' is for internal usage ONLY. Please ignore it when calling this function
-Public Sub PopupMenu(ParentMenuID As Integer, X As Single, Y As Single, Optional ClickedFromRootItem As Integer = -1)
+Public Sub PopupMenu(ParentMenuID As Integer, Optional X As Single = -1, Optional Y As Single = -1, Optional ClickedFromRootItem As Integer = -1)
+    On Error Resume Next
+    
     If UBound(Menus(ParentMenuID + 1).SubMenuID) > 0 Then
         If ClickedFromRootItem = -1 Then
             Call HideMenu
@@ -234,14 +236,24 @@ Public Sub PopupMenu(ParentMenuID As Integer, X As Single, Y As Single, Optional
         frmPopupMenu.CloseMenu
         ReleaseCapture
         With frmPopupMenu
-            .Left = X
-            .Top = Y
+            If X = -1 And Y = -1 Then
+                Dim CurPos  As POINT
+                
+                GetCursorPos CurPos
+                .Left = CurPos.X * Screen.TwipsPerPixelX
+                .Top = CurPos.Y * Screen.TwipsPerPixelY
+            Else
+                .Left = X
+                .Top = Y
+            End If
             If ClickedFromRootItem = -1 Then
                 .AddItems Me, Menus(ParentMenuID + 1).SubMenuID, 0
             Else
                 .AddItems Me, Menus(ParentMenuID + 1).SubMenuID, UserControl.labRootItem(ClickedFromRootItem).Width
             End If
+            .NoWhitelist = False
             .Show
+            .SetFocus
         End With
     End If
 End Sub
@@ -306,7 +318,7 @@ Private Sub labRootItem_MouseDown(Index As Integer, Button As Integer, Shift As 
     Dim wRect   As RECT
     
     If UBound(Menus(RootMenuID(Index)).SubMenus) > 0 Then
-        GetWindowRect UserControl.hWnd, wRect
+        GetWindowRect UserControl.hwnd, wRect
         With UserControl.lnBorderLeft
             .X1 = UserControl.labRootItem(Index).Left
             .Y1 = 0
@@ -352,7 +364,7 @@ Private Sub labRootItem_MouseMove(Index As Integer, Button As Integer, Shift As 
                 Call labRootItem_MouseDown(Index, 1, 0, 0, 0)
             End If
         Else
-            UserControl.labRootItem(Index).BackColor = RGB(62, 62, 64)
+            UserControl.labRootItem(Index).BackColor = RGB(92, 92, 94)
         End If
         UserControl.tmrCheckFocus.Enabled = True
     End If
@@ -370,7 +382,7 @@ Private Sub tmrCheckFocus_Timer()
     Dim pt          As POINT
     
     GetCursorPos pt
-    If Not bShow And WindowFromPoint(pt.X, pt.Y) <> UserControl.hWnd Then
+    If Not bShow And WindowFromPoint(pt.X, pt.Y) <> UserControl.hwnd Then
         Call HideMenu
         Call UserControl_MouseMove(0, 0, 0, 0)
         UserControl.tmrCheckFocus.Enabled = False

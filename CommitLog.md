@@ -1,5 +1,279 @@
 【日志】
 
+# 2020.1.15
+
+修复标题栏图标双击不能关闭窗口的问题：原来是弹出菜单挡住了鼠标按键。把弹出菜单的位置改成了标题栏下方。
+
+重写frmCallStack里面的GetCallStack()，现在（大概）能准确获取gdb的输出。~~看不懂原来的代码在干什么，大概脑袋抽筋。~~ 把原来的代码都注释掉了，不知道以后会不会再用上。
+
+原来404修改创建工程窗口的时候留下了一个bug，如果通过主窗口的菜单创建工程的话主界面的frmCreate窗口不会卸载掉。修好了该bug。
+
+增加了弹出菜单对键盘快捷键的支持（例如“打开(&O)”就能按O来触发）。
+
+把一些字符串常数替换成了字符串变量。
+
+对工程资源管理器的弹出菜单做了多语言支持。
+
+（啰嗦话）原来我有近两个月没commit过了... 因为前段时间要准备面试，挺忙的。面试完之后就压力大减了 :) 写代码也开(tong)心(ku)点啦
+
+# 2019.10.27
+
+把检查文件名是否合法的过程单独写成一个函数`CheckInvalidFileName`，因为不同的位置（比如重命名、创建文件）会用到这个过程。
+
+结构更改：新增文件夹信息结构`ProjectFolderStruct`；为代码文件信息结构`SourceFileStruct`添加`FolderIndex`属性，移除`IsHeaderFile`属性；为工程文件结构`ProjectFileStruct`添加`Folders()`数组，用来记录工程里面的所有文件夹；为树视图列表项绑定结构`TvItemToFileIndex`添加`IsFolder`属性，用来标记树视图列表项对应的项目是否为文件夹。
+
+frmMain的mnuRun_Click过程中判断文件是否为头文件的思路由检查文件的`IsHeaderFile`属性改为检查文件的扩展名是否为h或者hpp。
+
+frmMain的tmrCheckProcess_Timer过程中添加了检测并处理gdb进程意外退出的代码。
+
+修改frmPopupMenu的PopupNewMenu过程，把新窗体的NoWhiteList属性设置为True，修复了Pane浮动窗口中弹出菜单的二级菜单在失焦后不会自动隐藏的Bug。
+
+修改modTreeViewProc中树视图控件的子类化，处理其WM_CTLCOLOREDIT消息，让树视图编辑标签时的文本框的颜色更加友好。
+
+修改modTreeViewProc中树视图的文本框的子类化，处理其WM_KEYDOWN消息，分别处理了方向键和Ctrl+A快捷键。
+
+为工程资源管理器的树视图添加上下文菜单，并实现了添加文件夹、添加文件、重命名文件夹、重命名文件、用文件浏览器打开路径等过程。
+
+为工程资源管理器的树视图添加菜单键（VK_APPS）的响应。（虽然可能根本没人会发现...）
+
+# 2019.10.21
+
+抱歉这么久没有commit，因为这段时间真的好忙。
+
+改进DarkMenu的PopupMenu过程，把它的X、Y参数设置为可选的，默认弹出位置是鼠标指针的位置。在一些用户控件（如DarkTitleBar）对这个过程的调用也随之简化。
+
+为frmPopupMenu添加NoWhitelist变量，并调整失焦检测计时器的代码，允许在类名为`XTPDockingPaneMiniWnd`的窗口上失去一次焦点，解决工程资源管理器在浮动的时候不能弹出菜单的问题。
+
+为DarkTreeView控件添加HitTest函数，用来获取指定坐标位置对应的列表项。
+
+把ImgOptionBox的Focused、Content属性的参数的龌龊至极的变量命名换成好看点的单词。
+
+调整frmCreateOptions的“浏览”文本框和按钮的位置，让按钮不会遮住文本。
+
+修改frmCreateOptions中创建工程的代码，现在创建工程的时候会自动创建工程文件和cpp文件。创建之前会检测是否有重名文件。这样可以解决创建工程之后不能重命名的问题。
+
+修改frmCreateOptions中创建工程的代码，现在创建工程的时候不会在工程资源管理器的树视图里自动创建“源文件”节点。
+
+完善一些窗体在加载时自动根据语言设置控件文本的代码。
+
+为工程资源管理器窗口的树视图添加上下文菜单，不过代码尚未完善。
+
+整理了一下图标的文件夹。
+
+# 2019.9.1
+
+感谢404为新建对话框的UI的改进。
+
+弄好了搞乱掉的.gitignore。
+
+删掉了一些不需要的文件。
+
+现在frmCreate响应Esc键的时候会考虑是不是有标题栏。有的话才响应。
+
+添加：当设置ImgOptionBox的Focused属性时会RaiseEvent Click
+
+让代码的某些位置变得优雅一点点。
+
+~~404要开学了。~~
+
+# 2019.8.29
+
+处理了一下新版gdb获取本地变量信息的问题。新版gdb的输出实在太令人头疼了，比如`<incomplete sequence \214>`这种东西。我实在不知道该怎么写代码处理了，请原谅我。
+
+在Form_QueryUnload中添加禁用计时器的代码，防止gdb管道关闭之后仍然在获取管道内容。
+
+重新添加了所有文件，解决了.gitignore无效的问题。以后就不会受到.vbw之类文件的影响了。
+
+我觉得写这东西真的好累。一点都不快乐。原谅我过很长时间才push一点点东西。
+
+# 2019.8.25
+
+添加ByteArrayConv函数，替代VB6的StrConv的把字节数组转成字符串的功能。
+
+移除了gcc。改成用户自行安装，并选择安装路径。（如需测试：修改frmMain的Form_Load中`GccPath`和`GdbPath`两个变量）
+
+为断点列表添加按下显示详细信息的功能。
+
+处理不同版本的gdb的路径字符问题（旧版是“/”，新版是“\”）。
+
+为frmCreateOptions里的文本框响应Ctrl+A快捷键。
+
+为本地变量列表响应鼠标双击事件。
+
+添加ProcessExitedHandler过程，以处理调试进程退出之后的收尾工作。
+
+为frmMain的ClearDebugWindows过程添加一个ClearBreakpoints参数，因为有时候清空调试窗口信息的时候不需要清空断点列表里的信息。
+
+修改frmMain中运行部分的代码，让输出更加详细。
+
+修改frmMain中运行部分的代码，在向第一次gdb发送“continue”命令之后使用`ResumeThread`来恢复主线程运行。对于旧版gdb，continue命令能让进程恢复运行；但是对于较新的版本，需要`ResumeThread`才可以恢复进程运行。
+
+处理了新版gdb调试进程退出的输出。
+
+# 2019.8.13
+
+修改了DarkButton的颜色，使其跟DarkImageButton的颜色一致。
+
+新添加函数StrConvEx，使用WideCharToMultiByte来替代VB6自己的StrConv，修复了在英文系统上中文会变成问号的问题。
+
+修复了按下TabBar标签页的时候代码框不会获取到焦点的问题。
+
+为调用堆栈的ListView添加了鼠标按键处理，按下鼠标按键能看到调用堆栈信息。
+
+修复了frmMain的mnuRun中一处MsgBox没有改用NoSkinMsgBox的问题，导致弹出的消息框非常非常非常非常难看。
+
+添加DestroyToolTip过程，用来在程序退出前关闭掉工具提示文本窗口以释放资源。
+
+# 2019.8.12
+
+经过n（n≥5）次拖延后终于添加了.gitigore文件，忽略掉.vbw文件和Vb_autoBak文件夹。
+
+修复了DarkImgeButton控件颜色更改速度不一致的问题（鼠标移上去的时候颜色变亮得快，移出去的时候却变暗得慢）。
+
+修复了DarkListView的严重错误，由于函数忘记返回数值导致控件事件不能和消息处理正确的绑定。
+
+为DarkListView添加hWnd属性，返回用户控件的窗口句柄。
+
+为frmBreakpoints添加ClearEverything过程，用于清空断点列表中的地址。这部分代码本来放在frmMain的ClearDebugWindows过程中，但是为了让风格一致，做了此修改。
+
+编写了frmCallStack里的代码，能够对gdb的输出进行解析，并把调用堆栈的信息显示出来。写了frmLocals的代码之后觉得写这个窗口的代码轻松不少。
+
+为一些有机会出错的过程添加了On Error Resume Next，在编译前应该去掉这些行的注释，尽量避免程序崩溃。（我已经尽量对所有可能出现的情况进行了考虑，但是恐有遗漏之处，考虑有不周到的地方，所以为了保险起见，还是添加这句）
+
+为frmLocals添加ExpandItem过程，把展开列表项的代码单独写到一个过程里。让
+
+改善了frmLocals的ArrayParser，处理了一开始查找字符串的时候找不到“"”的情况。
+
+在frmLocals的Form_Load事件中初始化VarNodes数组，否则很大几率会导致编译的EXE未响应（即使已经加了On Error Resume Next）。
+
+为frmLocals添加工具提示文本，在按下列表项之后显示其信息。
+
+为frmLocals的ListView响应键盘的左、右方向键。
+
+优化frmLocals的picSelMargin_MouseDown事件代码，把计算节点层数的代码移到了If分支里面，避免无谓的计算。
+
+把窗体加载的时候一些NoSkinMsgBox换成了MsgBox，以及做了一些字符串常量和字符串变量的更换，因为考虑到窗体还没初始化完成，一些字符串资源尚未加载完成的情况。
+
+把DockingPane创建的窗口名从常量改成了变量。
+
+添加modTooltips.bas，工具提示文本模块。
+
+# 2019.8.8
+
+应404要求改了下DarkImageButton的鼠标移上去的颜色，使颜色更加明显一点。
+
+去掉了DarkListView的WS_BORDER样式，因为他的边框在加载皮肤之后变成了黑框，不是很好看。
+
+为一些更改窗口子类化的地方加了“ToDo”标志，方便之后修改。
+
+clsPipe在关闭管道（CloseDosIO()）的时候会发送退出命令，让gdb退出，大大减小程序退出之后gdb仍在运行的几率。
+
+为clsPipe的DosOutput函数添加一个可选的超时参数，如果传了这个参数，执行超时函数就会返回。
+
+编写了frmLocals里的代码，能够对gdb的输出进行解析，并把本地变量的信息显示出来。这个窗口的代码真是写得我天昏地暗！！！呕心沥血！！！
+
+把frmMain的GdbPipe改成了Public的，不要Private WithEvents了。因为别的窗体也需要用到它。
+
+把清空调试窗口信息的代码单独写成了一个过程。
+
+在编译前提示是否保存的时候添加了取消的选项，按下取消的时候会取消掉编译操作。
+
+建立gdb管道之后发送`set print repeats 0`给gdb，关闭了gdb对于重复的数组元素的“<repeats n times>”输出。
+
+等待附加进程的代码添加了超时，比较不优雅地解决了有时启动的时候会卡死的情况。
+
+在frmMain的Form_QueryUnload事件中添加了关闭管道的代码，减小程序退出之后gdb仍在运行的几率。
+
+优化tmrCheckProcess_Timer里的代码，防止获取gdb断点信息失败之后导致这里的代码出错。
+
+处理了gdb输出`Program exited normally.`的消息。这种情况带代表进程返回了0。
+
+修复了frmPopupMenu的菜单项有时候图标显示不正确的问题。
+
+去掉了TabBar自动为窗体添加WS_CHILD样式，因为这样虽然可以让主窗体不失去焦点，但是有时候会有奇奇怪怪的问题，比如文本框经常失焦。
+
+# 2019.7.29
+
+为ListView控件添加Click事件（NM_CLICK）；修改DoubleClick事件的处理方式（WM_xBUTTONDBLCLK -> NM_DBLCLK）；添加GetItemChecked函数的代码，用以获取列表项是否已勾选。
+
+为管道类添加ClearPipe函数，该函数使用ReadFile读取管道内的内容以清空管道。有时候分析gdb输出的时候会分析到之前的无用输出，因此添加该函数。
+
+为代码窗口添加断点、禁用的断点和当前行的图片，供之后使用。
+
+现在更改断点也视为更改了文件。
+
+鼠标移动到断点栏上面会显示对应的端点的信息。
+
+修复有时候菜单图标没绘制出来的问题。
+
+把frmSolutionExplorer中SolutionTreeView_DoubleClick的代码弄得优雅一点。
+
+添加运行、中断、停止的菜单图标。（感谢404帮忙绘制）
+
+添加GdbBreakpointMapInfo用户类型，用来把gdb里面的断点序号跟不同文件里面的断点映射起来。
+
+frmMain添加CurrState全局变量，用来记录当前的调试状态。
+
+frmMain的mnuRun_Click：按下之后先检查CurrState，如果是中断状态的话就向gdb发送继续运行命令。
+
+修复frmMain的mnuRun_Click中对重名EXE文件的检测，原来是ExePath还没赋值就用Dir去检测他了。
+
+改善frmMain的mnuRun_Click代码排版，看起来似乎舒服多了？（x
+
+在frmMain的mnuRun_Click中添加使用gdb下断点的代码。这部分的代码写得好辛苦，总结一下：
+1. 使用DosInput的时候命令后面要添加换行符！否则命令就不执行了... 好几次都栽在这个坑里。
+2. 断点列表里的最后一个元素是没有用到的。
+3. gdb的输出需要逐行分析，否则直接进行分析会很乱、很复杂。而一行行拆开分析就好很多了。
+4. 每次使用DosInput往gdb发送命令时应该先用ClearPipe清理管道，防止把上次的命令输出也一并分析了。
+
+使用frmCheckProcess来定时获取gdb是否有输出内容，有的话对其分析。分别处理了断点命中消息和程序退出消息。
+
+# 2019.7.25
+
+为ListView控件添加GridLines和CurrExStyle属性，并改进了该控件调整样式的方式（使用CurrExStyle变量而不是直接用常数值更改样式，能够使控件的多种样式能同时使用）。
+
+为ListView控件添加SetItemChecked方法和GetItemChecked方法（忘记编写了，晚点补上2333），用来获取列表项是否勾选。
+
+为代码窗体添加断点相关的代码，如添加断点、绘制断点、文本更改时更改有关的断点、文本删除时删除断点等。
+
+刷新断点的方式比较不优雅，是靠拦截代码框的WM_PAINT消息，然后做标记，告诉计时器断点需要刷新。暂时没有找到更优雅的方法。
+
+调整代码窗体的Form_Load中的代码顺序，修复界面布局不能正确计算。
+
+新建项目窗体：增加对工程名称、工程路径的命名检测。不允许特殊字符及空路径。按下确定键之后不直接创建cpp文件，而是等用户手动保存之后才创建。这样大概能更好的避免用户手贱把重要文件覆盖掉吧...(雾
+
+frmMain的mnuSave_Click中处理没有文件需要保存的情况。
+
+frmMain在显示frmStartupLogo的时候会Refresh它，否则它的内容显示不出来。
+
+修复菜单项左边的图标跟菜单项不对齐的问题。
+
+frmSaveBox的lstFiles_Click中处理没有选择保存文件的情况。如果用户一个文件都没有选择，就不给按下“是”。
+
+修改modConfig.bas里的代码排版...强迫症（x
+
+# 2019.7.22
+
+把DarkButton的AutoRedraw设置成True，大概可以减少闪烁吧。
+
+把frmCreateOptions和frmSaveBox的标题栏改名，使他们不能被拖进TabBar。
+
+frmMain添加IsSaveRequired函数，用来检查是否有文件未保存。
+
+把frmMain保存的代码放到了frmSaveBox里，能够直观的显示所有需要保存的文件，并让用户可以自行选择保存的文件。
+
+优化frmMain中mnuRun_Click的保存文件的代码，更加易于使用。
+
+frmMain的mnuRun_Click添加检查同名exe文件的过程，遇到同名的exe文件时会提示用户。
+
+frmMain的Form_QueryUnload中添加保存文件的代码。
+
+添加断点信息结构。同时也为代码文件信息结构中添加断点信息。
+
+把代码文件信息结构的用户类型命名改得好听一点。（x
+
+添加GetFileName函数，用于从指定路径分隔出文件名（即最后一个“\”后面的文本）
+
 # 2019.7.21
 
 大幅删改ListView的代码。由于有皮肤控件帮忙，ListView可以更优雅的实现，于是去除所有不必要的控件和代码。另外把该控件的hWnd变量重命名为了lvHwnd。~~mmp是谁这样子起变量名的！！！让我发现不打死他！好像是自己起的哦...~~

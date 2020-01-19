@@ -7,6 +7,7 @@ Begin VB.UserControl DarkTreeView
    ClientWidth     =   4065
    ScaleHeight     =   3960
    ScaleWidth      =   4065
+   ToolboxBitmap   =   "DarkTreeView.ctx":0000
 End
 Attribute VB_Name = "DarkTreeView"
 Attribute VB_GlobalNameSpace = False
@@ -63,7 +64,7 @@ Public Function AddItem(ItemText As String, Optional ParentItem As Long = 0) As 
     Dim ti          As TVINSERTSTRUCTEX
     Dim TextBuf()   As Byte
     
-    TextBuf = StrConv(ItemText & vbNullChar, vbFromUnicode)
+    TextBuf = StrConvEx(ItemText)
     With ti
         .hInsertAfter = TVI_LAST
         .hParent = ParentItem
@@ -127,7 +128,7 @@ Public Function GetItemText(ByVal Item As Long) As String
         .hItem = Item
     End With
     SendMessageA wndTreeView, TVM_GETITEM, 0, ByVal VarPtr(tvi)
-    GetItemText = Split(StrConv(tmp, vbUnicode), vbNullChar)(0)
+    GetItemText = ByteArrayConv(tmp)
 End Function
 
 '描述:      获取指定列表项的文本
@@ -138,7 +139,7 @@ Public Function SetItemText(ByVal Item As Long, NewText As String) As Boolean
     Dim tvi         As TVITEM
     Dim buf()       As Byte
     
-    buf = StrConv(NewText & vbNullChar, vbFromUnicode)
+    buf = StrConvEx(NewText)
     With tvi
         .mask = TVIF_TEXT
         .cchTextMax = UBound(buf)
@@ -166,6 +167,17 @@ End Function
 '返回值:    如果执行成功则返回True
 Public Function SelectItem(ByVal Item As Long) As Boolean
     SelectItem = (SendMessageA(wndTreeView, TVM_SELECTITEM, TVGN_CARET, ByVal Item) <> 0)
+End Function
+
+'描述:      从指定坐标获取列表项的句柄
+'参数:      X, Y: 指定坐标
+'返回值:    如果有列表项在指定的坐标的位置，返回该列表项的句柄；否则返回0
+Public Function HitTest(X As Long, Y As Long) As Long
+    Dim tvhti   As TVHITTESTINFO
+    
+    tvhti.pt.X = X
+    tvhti.pt.Y = Y
+    HitTest = SendMessageA(wndTreeView, TVM_HITTEST, ByVal 0, ByVal VarPtr(tvhti))
 End Function
 
 'WARNING! DO NOT REMOVE OR MODIFY THE FOLLOWING COMMENTED LINES!

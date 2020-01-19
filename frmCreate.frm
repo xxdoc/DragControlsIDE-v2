@@ -44,7 +44,7 @@ Begin VB.Form frmCreate
       MaxButtonVisible=   0   'False
       MinButtonVisible=   0   'False
       BindCaption     =   -1  'True
-      Picture         =   "frmCreate.frx":1BCC2
+      Picture         =   "frmCreate.frx":10CA
    End
    Begin DragControlsIDE.DarkImageButton cmdNewWindowProgram 
       Height          =   765
@@ -54,7 +54,7 @@ Begin VB.Form frmCreate
       Width           =   6855
       _ExtentX        =   12091
       _ExtentY        =   1349
-      Image           =   "frmCreate.frx":1C914
+      Image           =   "frmCreate.frx":1844
       HasBorder       =   0   'False
       Caption         =   "       新建窗口程序"
       Alignment       =   0
@@ -67,7 +67,7 @@ Begin VB.Form frmCreate
       Width           =   6855
       _ExtentX        =   12091
       _ExtentY        =   1349
-      Image           =   "frmCreate.frx":1CA47
+      Image           =   "frmCreate.frx":1977
       HasBorder       =   0   'False
       Caption         =   "       新建控制台程序"
       Alignment       =   0
@@ -80,7 +80,7 @@ Begin VB.Form frmCreate
       Width           =   6855
       _ExtentX        =   12091
       _ExtentY        =   1349
-      Image           =   "frmCreate.frx":1CBC8
+      Image           =   "frmCreate.frx":1AF8
       HasBorder       =   0   'False
       Caption         =   "       新建空白C++程序"
       Alignment       =   0
@@ -93,7 +93,7 @@ Begin VB.Form frmCreate
       Width           =   6855
       _ExtentX        =   12091
       _ExtentY        =   1349
-      Image           =   "frmCreate.frx":1CF0D
+      Image           =   "frmCreate.frx":1E3D
       HasBorder       =   0   'False
       Caption         =   "       打开工程..."
       Alignment       =   0
@@ -190,11 +190,18 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+'====================================================
+'描述:      新建项目窗口，用户在这里选择新建项目的类型
+'作者:      冰棍
+'文件:      frmCreateOptions.frm
+'====================================================
+
 Option Explicit
 
 Private Sub cmdNewWindowProgram_Click()
     On Error Resume Next
-    frmCreateOptions.NewProjectType = 1                 '设置工程类型
+    frmCreateOptions.TypeOption(1).Focused = True       '设置工程类型
+    frmCreateOptions.RefreshName
     frmCreateOptions.Show                               '显示新建选项
     frmCreateOptions.edProjectName.SetFocus
     Unload Me
@@ -202,7 +209,8 @@ End Sub
 
 Private Sub cmdNewConsoleProgram_Click()
     On Error Resume Next
-    frmCreateOptions.NewProjectType = 2                 '设置工程类型
+    frmCreateOptions.TypeOption(2).Focused = True       '设置工程类型
+    frmCreateOptions.RefreshName
     frmCreateOptions.Show                               '显示新建选项
     frmCreateOptions.edProjectName.SetFocus
     Unload Me
@@ -210,7 +218,8 @@ End Sub
 
 Private Sub cmdNewPlainCpp_Click()
     On Error Resume Next
-    frmCreateOptions.NewProjectType = 3                 '设置工程类型
+    frmCreateOptions.TypeOption(3).Focused = True       '设置工程类型
+    frmCreateOptions.RefreshName
     frmCreateOptions.Show                               '显示新建选项
     frmCreateOptions.edProjectName.SetFocus
     Unload Me
@@ -225,9 +234,11 @@ Private Sub cmdOpenProject_Click()
 End Sub
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
-    If KeyAscii = vbKeyEscape Then                      '按下Esc键关闭窗体
-        KeyAscii = 0
-        Unload Me
+    If Me.DarkTitleBar_NoDrop.Visible Then              '有标题栏才响应Esc键
+        If KeyAscii = vbKeyEscape Then                      '按下Esc键关闭窗体
+            KeyAscii = 0
+            Unload Me
+        End If
     End If
 End Sub
 

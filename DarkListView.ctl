@@ -30,18 +30,23 @@ Event ItemSelectionChanged()
 Event MouseMove(Button As Long, Shift As Long, X As Integer, Y As Integer)
 Event MouseDown(Button As Integer, Shift As Long, X As Integer, Y As Integer)
 Event MouseUp(Button As Integer, Shift As Long, X As Integer, Y As Integer)
-Event DoubleClick(Button As Integer, Shift As Long, X As Integer, Y As Integer)
 Event KeyDown(KeyCode As Integer, Shift As Integer)
 Event KeyUp(KeyCode As Integer, Shift As Integer)
 Event ColumnClick(HeaderIndex As Integer)
 Event ListViewLostFocus()
 Event ListViewGotFocus()
+Event Click(iItem As Long, iSubItem As Long, X As Long, Y As Long)
+Event DoubleClick(iItem As Long, iSubItem As Long, X As Long, Y As Long)
 
 'Default Property Values:
 Const m_def_FullRowSelect = True
 
 'Property Variables:
 Dim m_FullRowSelect As Boolean
+Dim m_GridLines     As Boolean
+Dim m_CheckBoxes    As Boolean
+
+Dim CurrExStyle     As Long
 
 'Please note that this function is for internal usage only and is NOT suggested to call directly
 Public Sub RaiseMouseMove(Button As Long, Shift As Long, X As Integer, Y As Integer)
@@ -56,11 +61,6 @@ End Sub
 'Please note that this function is for internal usage only and is NOT suggested to call directly
 Public Sub RaiseMouseUp(Button As Integer, Shift As Long, X As Integer, Y As Integer)
     RaiseEvent MouseUp(Button, Shift, X, Y)
-End Sub
-
-'Please note that this function is for internal usage only and is NOT suggested to call directly
-Public Sub RaiseDoubleClick(Button As Integer, Shift As Long, X As Integer, Y As Integer)
-    RaiseEvent DoubleClick(Button, Shift, X, Y)
 End Sub
 
 'Please note that this function is for internal usage only and is NOT suggested to call directly
@@ -88,12 +88,21 @@ Public Sub RaiseGotFocus()
     RaiseEvent ListViewGotFocus
 End Sub
 
+'Please note that this function is for internal usage only and is NOT suggested to call directly
+Public Sub RaiseClick(iItem As Long, iSubItem As Long, X As Long, Y As Long)
+    RaiseEvent Click(iItem, iSubItem, X, Y)
+End Sub
+
+'Please note that this function is for internal usage only and is NOT suggested to call directly
+Public Sub RaiseDoubleClick(iItem As Long, iSubItem As Long, X As Long, Y As Long)
+    RaiseEvent DoubleClick(iItem, iSubItem, X, Y)
+End Sub
+
 Public Function AddColumnHeader(Text As String, Optional Width As Integer = 75, Optional Index As Long = -1) As Long
-    
     Dim lvCol       As LVCOLUMN
     Dim tmpStr()    As Byte
     
-    tmpStr = StrConv(Text & vbNullChar, vbFromUnicode)
+    tmpStr = StrConvEx(Text)
     With lvCol
         .mask = LVCF_WIDTH Or LVCF_TEXT Or LVCF_FMT
         .fmt = LVCFMT_LEFT
@@ -114,7 +123,7 @@ Public Function AddItem(Text As String, Optional Index As Long = -1) As Long
     Dim lvi         As LVITEM
     Dim tmpStr()    As Byte
     
-    tmpStr = StrConv(Text & vbNullChar, vbFromUnicode)
+    tmpStr = StrConvEx(Text)
     With lvi
         .iItem = IIf(Index = -1, SendMessageA(lvHwnd, LVM_GETITEMCOUNT, ByVal 0, ByVal 0), Index)
         .mask = LVIF_TEXT
@@ -140,14 +149,14 @@ Public Function GetItemText(Index As Long, Optional SubItemIndex As Long = 0) As
         .iSubItem = SubItemIndex
     End With
     SendMessageA lvHwnd, LVM_GETITEM, 0, ByVal VarPtr(lvi)
-    GetItemText = Split(StrConv(tmpStr, vbUnicode), vbNullChar)(0)
+    GetItemText = ByteArrayConv(tmpStr)
 End Function
 
 Public Function SetItemText(Text As String, Index As Long, Optional SubItemIndex As Long = 0) As Long
     Dim lvi         As LVITEM
     Dim tmpStr()    As Byte
     
-    tmpStr = StrConv(Text & vbNullChar, vbFromUnicode)
+    tmpStr = StrConvEx(Text)
     With lvi
         .iSubItem = SubItemIndex
         .mask = LVIF_TEXT
@@ -171,14 +180,14 @@ Public Function GetColumnText(Index As Long) As String
         .pszText = VarPtr(tmpStr(0))
     End With
     SendMessageA lvHwnd, LVM_GETCOLUMN, Index, ByVal VarPtr(lvc)
-    GetColumnText = Split(StrConv(tmpStr, vbUnicode), vbNullChar)(0)
+    GetColumnText = ByteArrayConv(tmpStr)
 End Function
 
 Public Function SetColumnText(Index As Long, NewText As String) As Long
     Dim tmpStr()    As Byte
     Dim lvc         As LVCOLUMN
     
-    tmpStr = StrConv(NewText & vbNullChar, vbFromUnicode)
+    tmpStr = StrConvEx(NewText)
     With lvc
         .mask = LVCF_TEXT
         .cchTextMax = 255
@@ -199,6 +208,28 @@ Public Function SetColumnWidth(Index As Long, NewWidth As Long) As Long
     SetColumnWidth = SendMessageA(lvHwnd, LVM_SETCOLUMNWIDTH, Index, ByVal NewWidth)
 End Function
 
+'描述:      设置列表项的勾选状态（只适用于有选择框的ListVIew）
+'参数:      Index: 列表项序号
+'.          bChecked: 勾选状态。True: 勾选; False: 不勾选
+Public Sub SetItemChecked(Index As Long, bChecked As Boolean)
+    Dim lvi         As LVITEM
+    
+    '资料: https://docs.microsoft.com/en-us/windows/win32/controls/lvm-setitemstate
+    With lvi
+        .stateMask = LVIS_STATEIMAGEMASK
+        .state = IIf(bChecked, 2, 1) * (2 ^ 12)             'x * 2^12 = x << 12
+    End With
+    SendMessageA lvHwnd, LVM_SETITEMSTATE, ByVal Index, ByVal VarPtr(lvi)
+End Sub
+
+'描述:      获取列表项的勾选状态（只适用于有选择框的ListVIew）
+'参数:      Index: 列表项序号
+'返回值:    True: 勾选; False: 不勾选
+Public Function GetItemChecked(Index As Long) As Boolean
+    'x \ 2^12 = x >> 12
+    GetItemChecked = ((SendMessageA(lvHwnd, LVM_GETITEMSTATE, ByVal Index, LVIS_STATEIMAGEMASK) \ (2 ^ 12) - 1) = 1)
+End Function
+
 Public Sub Clear()
     SendMessageA lvHwnd, LVM_DELETEALLITEMS, 0, 0
 End Sub
@@ -211,7 +242,7 @@ Public Function FindItem(Text As String, Optional FullMatch As Boolean = True, O
     Dim tmpStr()    As Byte
     Dim lvfi        As LVFINDINFO
     
-    tmpStr = StrConv(Text & vbNullChar, vbFromUnicode)
+    tmpStr = StrConvEx(Text)
     If Not FullMatch Then
         lvfi.Flags = LVFI_PARTIAL
     End If
@@ -278,14 +309,15 @@ End Sub
 Private Sub UserControl_KeyUp(KeyCode As Integer, Shift As Integer)
     RaiseEvent KeyUp(KeyCode, Shift)
 End Sub
- 
+
 Private Sub UserControl_Initialize()
-    lvHwnd = CreateWindowExA(WS_EX_NOPARENTNOTIFY, "SysListView32", "", _
-        WS_VISIBLE Or WS_CHILD Or WS_BORDER Or WS_TABSTOP Or LVS_ALIGNLEFT Or LVS_REPORT Or LVS_SINGLESEL, _
+    CurrExStyle = WS_EX_NOPARENTNOTIFY
+    lvHwnd = CreateWindowExA(CurrExStyle, "SysListView32", "", _
+        WS_VISIBLE Or WS_CHILD Or WS_TABSTOP Or LVS_ALIGNLEFT Or LVS_REPORT Or LVS_SINGLESEL, _
         0, 0, UserControl.ScaleWidth / Screen.TwipsPerPixelX, _
         UserControl.ScaleHeight / Screen.TwipsPerPixelY, UserControl.hWnd, 0, App.hInstance, 0)
     
-    SetPropA lvHwnd, "ID", CtlListPushBack(Me)
+    SetPropA lvHwnd, "ID", ByVal CtlListPushBack(Me)
     SetPropA lvHwnd, "PARENT_CTL", UserControl.hWnd
     
     SendMessageA lvHwnd, LVM_SETBKCOLOR, ByVal 0, ByVal RGB(51, 51, 55)
@@ -295,14 +327,34 @@ End Sub
 
 Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
     On Error Resume Next
+    
     If Ambient.UserMode Then
         PrevLVUserCtlProc = SetWindowLongA(UserControl.hWnd, GWL_WNDPROC, AddressOf ListViewNotifyMessageProc)
         PrevListViewProc = SetWindowLongA(lvHwnd, GWL_WNDPROC, AddressOf ListViewProc)
     End If
+    
     m_FullRowSelect = PropBag.ReadProperty("FullRowSelect", m_def_FullRowSelect)
     If m_FullRowSelect Then
-        SendMessageA lvHwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, LVS_EX_FULLROWSELECT
+        CurrExStyle = CurrExStyle Or LVS_EX_FULLROWSELECT
+    Else
+        CurrExStyle = CurrExStyle And (Not LVS_EX_FULLROWSELECT)
     End If
+    
+    m_GridLines = PropBag.ReadProperty("GridLines", False)
+    If m_GridLines Then
+        CurrExStyle = CurrExStyle Or LVS_EX_GRIDLINES
+    Else
+        CurrExStyle = CurrExStyle And (Not LVS_EX_GRIDLINES)
+    End If
+    
+    m_CheckBoxes = PropBag.ReadProperty("CheckBoxes", False)
+    If m_CheckBoxes Then
+        CurrExStyle = CurrExStyle Or LVS_EX_CHECKBOXES
+    Else
+        CurrExStyle = CurrExStyle And Not (LVS_EX_CHECKBOXES)
+    End If
+    
+    SendMessageA lvHwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, CurrExStyle
 End Sub
 
 Private Sub UserControl_Resize()
@@ -321,24 +373,63 @@ End Property
 Public Property Let FullRowSelect(ByVal New_FullRowSelect As Boolean)
     m_FullRowSelect = New_FullRowSelect
     If New_FullRowSelect Then
-        SendMessageA lvHwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, LVS_EX_FULLROWSELECT
+        CurrExStyle = CurrExStyle Or LVS_EX_FULLROWSELECT
     Else
-        SendMessageA lvHwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, LVS_EX_FULLROWSELECT, 0
+        CurrExStyle = CurrExStyle And (Not LVS_EX_FULLROWSELECT)
     End If
+    SendMessageA lvHwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, CurrExStyle
     PropertyChanged "FullRowSelect"
+End Property
+
+Public Property Get GridLines() As Boolean
+    GridLines = m_GridLines
+End Property
+
+Public Property Let GridLines(ByVal New_GridLines As Boolean)
+    m_GridLines = New_GridLines
+    If New_GridLines Then
+        CurrExStyle = CurrExStyle Or LVS_EX_GRIDLINES
+    Else
+        CurrExStyle = CurrExStyle And (Not LVS_EX_GRIDLINES)
+    End If
+    SendMessageA lvHwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, CurrExStyle
+    PropertyChanged "GridLines"
+End Property
+
+Public Property Get CheckBoxes() As Boolean
+    CheckBoxes = m_CheckBoxes
+End Property
+
+Public Property Let CheckBoxes(ByVal New_CheckBoxes As Boolean)
+    m_CheckBoxes = New_CheckBoxes
+    If New_CheckBoxes Then
+        CurrExStyle = CurrExStyle Or LVS_EX_CHECKBOXES
+    Else
+        CurrExStyle = CurrExStyle And (Not LVS_EX_CHECKBOXES)
+    End If
+    SendMessageA lvHwnd, LVM_SETEXTENDEDLISTVIEWSTYLE, 0, CurrExStyle
+    PropertyChanged "CheckBoxes"
 End Property
 
 Public Property Get ListViewHwnd() As Long
     ListViewHwnd = lvHwnd
 End Property
 
+Public Property Get hWnd() As Long
+    hWnd = UserControl.hWnd
+End Property
+
 'Initialize Properties for User Control
 Private Sub UserControl_InitProperties()
     m_FullRowSelect = m_def_FullRowSelect
+    m_GridLines = False
+    m_CheckBoxes = False
 End Sub
 
 'Write property values to storage
 Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
     Call PropBag.WriteProperty("FullRowSelect", m_FullRowSelect, m_def_FullRowSelect)
+    Call PropBag.WriteProperty("GridLines", m_GridLines, False)
+    Call PropBag.WriteProperty("CheckBoxes", m_CheckBoxes, False)
 End Sub
 

@@ -35,7 +35,7 @@ Begin VB.Form frmMain
    End
    Begin DragControlsIDE.DarkMenu DarkMenu 
       Align           =   1  'Align Top
-      Height          =   315
+      Height          =   345
       Left            =   0
       TabIndex        =   3
       Top             =   495
@@ -142,32 +142,32 @@ Begin VB.Form frmMain
       MenuID_3        =   2
       MenuText_3      =   "加载项目 (&O)       Ctrl+O"
       MenuVisible_3   =   -1  'True
-      MenuIcon_3      =   "frmMain.frx":1BD02
+      MenuIcon_3      =   "frmMain.frx":1BE11
       SubMenuID_3_0   =   0
       MenuID_4        =   3
       MenuText_4      =   "保存 (&S)           Ctrl+S"
       MenuVisible_4   =   -1  'True
-      MenuIcon_4      =   "frmMain.frx":1BD22
+      MenuIcon_4      =   "frmMain.frx":1BFFB
       SubMenuID_4_0   =   0
       MenuID_5        =   4
       MenuText_5      =   "另存为 (&A)         Ctrl+Shift+S"
       MenuVisible_5   =   -1  'True
-      MenuIcon_5      =   "frmMain.frx":1BD42
+      MenuIcon_5      =   "frmMain.frx":1C109
       SubMenuID_5_0   =   0
       MenuID_6        =   5
       MenuText_6      =   "-"
       MenuVisible_6   =   -1  'True
-      MenuIcon_6      =   "frmMain.frx":1BD62
+      MenuIcon_6      =   "frmMain.frx":1C2C8
       SubMenuID_6_0   =   0
       MenuID_7        =   6
       MenuText_7      =   "退出 (&E)"
       MenuVisible_7   =   -1  'True
-      MenuIcon_7      =   "frmMain.frx":1BD82
+      MenuIcon_7      =   "frmMain.frx":1C2E8
       SubMenuID_7_0   =   0
       MenuID_8        =   7
       MenuText_8      =   "编辑"
       MenuVisible_8   =   -1  'True
-      MenuIcon_8      =   "frmMain.frx":1BDA2
+      MenuIcon_8      =   "frmMain.frx":1C308
       SUBMENU_ITEM_COUNT_8=   19
       SubMenuID_8_0   =   0
       SubMenuText_8_1 =   "撤销 (&U)           Ctrl+Z"
@@ -211,102 +211,102 @@ Begin VB.Form frmMain
       MenuID_9        =   8
       MenuText_9      =   "撤销 (&U)           Ctrl+Z"
       MenuVisible_9   =   -1  'True
-      MenuIcon_9      =   "frmMain.frx":1BDC2
+      MenuIcon_9      =   "frmMain.frx":1C328
       SubMenuID_9_0   =   0
       MenuID_10       =   9
       MenuText_10     =   "重复 (&R)           Ctrl+Y"
       MenuVisible_10  =   -1  'True
-      MenuIcon_10     =   "frmMain.frx":1BDE2
+      MenuIcon_10     =   "frmMain.frx":1C4F9
       SubMenuID_10_0  =   0
       MenuID_11       =   10
       MenuText_11     =   "-"
       MenuVisible_11  =   -1  'True
-      MenuIcon_11     =   "frmMain.frx":1BE02
+      MenuIcon_11     =   "frmMain.frx":1C708
       SubMenuID_11_0  =   0
       MenuID_12       =   11
       MenuText_12     =   "剪切 (&U)           Ctrl+X"
       MenuVisible_12  =   -1  'True
-      MenuIcon_12     =   "frmMain.frx":1BE22
+      MenuIcon_12     =   "frmMain.frx":1C728
       SubMenuID_12_0  =   0
       MenuID_13       =   12
       MenuText_13     =   "复制 (&C)           Ctrl+C"
       MenuVisible_13  =   -1  'True
-      MenuIcon_13     =   "frmMain.frx":1BE42
+      MenuIcon_13     =   "frmMain.frx":1C888
       SubMenuID_13_0  =   0
       MenuID_14       =   13
       MenuText_14     =   "粘贴 (&P)           Ctrl+V"
       MenuVisible_14  =   -1  'True
-      MenuIcon_14     =   "frmMain.frx":1BE62
+      MenuIcon_14     =   "frmMain.frx":1C9E3
       SubMenuID_14_0  =   0
       MenuID_15       =   14
       MenuText_15     =   "全选 (&S)           Ctrl+A"
       MenuVisible_15  =   -1  'True
-      MenuIcon_15     =   "frmMain.frx":1BE82
+      MenuIcon_15     =   "frmMain.frx":1CB3B
       SubMenuID_15_0  =   0
       MenuID_16       =   15
       MenuText_16     =   "删除行 (&D)         Ctrl+L"
       MenuVisible_16  =   -1  'True
-      MenuIcon_16     =   "frmMain.frx":1BEA2
+      MenuIcon_16     =   "frmMain.frx":1CC3A
       SubMenuID_16_0  =   0
       MenuID_17       =   16
       MenuText_17     =   "-"
       MenuVisible_17  =   -1  'True
-      MenuIcon_17     =   "frmMain.frx":1BEC2
+      MenuIcon_17     =   "frmMain.frx":1CC5A
       SubMenuID_17_0  =   0
       MenuID_18       =   17
       MenuText_18     =   "查找 (&F)           Ctrl+F"
       MenuVisible_18  =   -1  'True
-      MenuIcon_18     =   "frmMain.frx":1BEE2
+      MenuIcon_18     =   "frmMain.frx":1CC7A
       SubMenuID_18_0  =   0
       MenuID_19       =   18
       MenuText_19     =   "替换 (&E)           Ctrl+H"
       MenuVisible_19  =   -1  'True
-      MenuIcon_19     =   "frmMain.frx":1BF02
+      MenuIcon_19     =   "frmMain.frx":1CD8D
       SubMenuID_19_0  =   0
       MenuID_20       =   19
       MenuText_20     =   "-"
       MenuVisible_20  =   -1  'True
-      MenuIcon_20     =   "frmMain.frx":1BF22
+      MenuIcon_20     =   "frmMain.frx":1CEF1
       SubMenuID_20_0  =   0
       MenuID_21       =   20
       MenuText_21     =   "向外缩进 (&I)       Tab"
       MenuVisible_21  =   -1  'True
-      MenuIcon_21     =   "frmMain.frx":1BF42
+      MenuIcon_21     =   "frmMain.frx":1CF11
       SubMenuID_21_0  =   0
       MenuID_22       =   21
       MenuText_22     =   "向内缩进 (&O)       Shift+Tab"
       MenuVisible_22  =   -1  'True
-      MenuIcon_22     =   "frmMain.frx":1BF62
+      MenuIcon_22     =   "frmMain.frx":1D268
       SubMenuID_22_0  =   0
       MenuID_23       =   22
       MenuText_23     =   "-"
       MenuVisible_23  =   -1  'True
-      MenuIcon_23     =   "frmMain.frx":1BF82
+      MenuIcon_23     =   "frmMain.frx":1D5BF
       SubMenuID_23_0  =   0
       MenuID_24       =   23
       MenuText_24     =   "添加/移除断点 (&B)  F9"
       MenuVisible_24  =   -1  'True
-      MenuIcon_24     =   "frmMain.frx":1BFA2
+      MenuIcon_24     =   "frmMain.frx":1D5DF
       SubMenuID_24_0  =   0
       MenuID_25       =   24
       MenuText_25     =   "清除所有断点 (&M)"
       MenuVisible_25  =   -1  'True
-      MenuIcon_25     =   "frmMain.frx":1BFC2
+      MenuIcon_25     =   "frmMain.frx":1D5FF
       SubMenuID_25_0  =   0
       MenuID_26       =   25
       MenuText_26     =   "-"
       MenuVisible_26  =   -1  'True
-      MenuIcon_26     =   "frmMain.frx":1BFE2
+      MenuIcon_26     =   "frmMain.frx":1D61F
       SubMenuID_26_0  =   0
       MenuID_27       =   26
       MenuText_27     =   "跳转到行 (&J)       Ctrl+G"
       MenuVisible_27  =   -1  'True
-      MenuIcon_27     =   "frmMain.frx":1C002
+      MenuIcon_27     =   "frmMain.frx":1D63F
       SubMenuID_27_0  =   0
       MenuID_28       =   27
       MenuText_28     =   "视图"
       MenuVisible_28  =   -1  'True
-      MenuIcon_28     =   "frmMain.frx":1C022
+      MenuIcon_28     =   "frmMain.frx":1D65F
       SUBMENU_ITEM_COUNT_28=   6
       SubMenuID_28_0  =   0
       SubMenuText_28_1=   "工具栏 (&T)"
@@ -325,42 +325,42 @@ Begin VB.Form frmMain
       MenuText_29     =   "工具栏 (&T)"
       MenuCheckBox_29 =   -1  'True
       MenuVisible_29  =   -1  'True
-      MenuIcon_29     =   "frmMain.frx":1C042
+      MenuIcon_29     =   "frmMain.frx":1D67F
       SubMenuID_29_0  =   0
       MenuID_30       =   29
       MenuText_30     =   "控件箱 (&C)"
       MenuCheckBox_30 =   -1  'True
       MenuVisible_30  =   -1  'True
-      MenuIcon_30     =   "frmMain.frx":1C062
+      MenuIcon_30     =   "frmMain.frx":1D744
       SubMenuID_30_0  =   0
       MenuID_31       =   30
       MenuText_31     =   "属性 (&P)           F4"
       MenuCheckBox_31 =   -1  'True
       MenuVisible_31  =   -1  'True
-      MenuIcon_31     =   "frmMain.frx":1C082
+      MenuIcon_31     =   "frmMain.frx":1D7F7
       SubMenuID_31_0  =   0
       MenuID_32       =   31
       MenuText_32     =   "工程资源管理器 (&M)"
       MenuCheckBox_32 =   -1  'True
       MenuVisible_32  =   -1  'True
-      MenuIcon_32     =   "frmMain.frx":1C0A2
+      MenuIcon_32     =   "frmMain.frx":1D983
       SubMenuID_32_0  =   0
       MenuID_33       =   32
       MenuText_33     =   "错误列表 (&E)       Ctrl+E"
       MenuCheckBox_33 =   -1  'True
       MenuVisible_33  =   -1  'True
-      MenuIcon_33     =   "frmMain.frx":1C0C2
+      MenuIcon_33     =   "frmMain.frx":1D9A3
       SubMenuID_33_0  =   0
       MenuID_34       =   33
       MenuText_34     =   "输出 (&O)           Ctrl+Alt+O"
       MenuCheckBox_34 =   -1  'True
       MenuVisible_34  =   -1  'True
-      MenuIcon_34     =   "frmMain.frx":1C0E2
+      MenuIcon_34     =   "frmMain.frx":1DB51
       SubMenuID_34_0  =   0
       MenuID_35       =   34
       MenuText_35     =   "生成"
       MenuVisible_35  =   -1  'True
-      MenuIcon_35     =   "frmMain.frx":1C102
+      MenuIcon_35     =   "frmMain.frx":1DCB9
       SUBMENU_ITEM_COUNT_35=   2
       SubMenuID_35_0  =   0
       SubMenuText_35_1=   "生成代码文件 (&C)"
@@ -370,17 +370,17 @@ Begin VB.Form frmMain
       MenuID_36       =   35
       MenuText_36     =   "生成代码文件 (&C)"
       MenuVisible_36  =   -1  'True
-      MenuIcon_36     =   "frmMain.frx":1C122
+      MenuIcon_36     =   "frmMain.frx":1DCD9
       SubMenuID_36_0  =   0
       MenuID_37       =   36
       MenuText_37     =   "生成可执行文件 (&E) Ctrl+F5"
       MenuVisible_37  =   -1  'True
-      MenuIcon_37     =   "frmMain.frx":1C142
+      MenuIcon_37     =   "frmMain.frx":1DEE9
       SubMenuID_37_0  =   0
       MenuID_38       =   37
       MenuText_38     =   "调试"
       MenuVisible_38  =   -1  'True
-      MenuIcon_38     =   "frmMain.frx":1C162
+      MenuIcon_38     =   "frmMain.frx":1DF09
       SUBMENU_ITEM_COUNT_38=   9
       SubMenuID_38_0  =   0
       SubMenuText_38_1=   "窗口"
@@ -404,7 +404,7 @@ Begin VB.Form frmMain
       MenuID_39       =   38
       MenuText_39     =   "窗口"
       MenuVisible_39  =   -1  'True
-      MenuIcon_39     =   "frmMain.frx":1C182
+      MenuIcon_39     =   "frmMain.frx":1DF29
       SUBMENU_ITEM_COUNT_39=   13
       SubMenuID_39_0  =   0
       SubMenuText_39_1=   "断点列表 (&B)       Ctrl+Alt+B"
@@ -437,121 +437,121 @@ Begin VB.Form frmMain
       MenuText_40     =   "断点列表 (&B)       Ctrl+Alt+B"
       MenuCheckBox_40 =   -1  'True
       MenuVisible_40  =   -1  'True
-      MenuIcon_40     =   "frmMain.frx":1C1A2
+      MenuIcon_40     =   "frmMain.frx":1DF49
       SubMenuID_40_0  =   0
       MenuID_41       =   40
       MenuText_41     =   "-"
       MenuVisible_41  =   -1  'True
-      MenuIcon_41     =   "frmMain.frx":1C1C2
+      MenuIcon_41     =   "frmMain.frx":1E050
       SubMenuID_41_0  =   0
       MenuID_42       =   41
       MenuText_42     =   "监视窗口 (&W)       Ctrl+Alt+W"
       MenuCheckBox_42 =   -1  'True
       MenuVisible_42  =   -1  'True
-      MenuIcon_42     =   "frmMain.frx":1C1E2
+      MenuIcon_42     =   "frmMain.frx":1E070
       SubMenuID_42_0  =   0
       MenuID_43       =   42
       MenuText_43     =   "本地 (&L)           Ctrl+Alt+L"
       MenuCheckBox_43 =   -1  'True
       MenuVisible_43  =   -1  'True
-      MenuIcon_43     =   "frmMain.frx":1C202
+      MenuIcon_43     =   "frmMain.frx":1E1A7
       SubMenuID_43_0  =   0
       MenuID_44       =   43
       MenuText_44     =   "立即窗口 (&I)       Ctrl+Alt+I"
       MenuCheckBox_44 =   -1  'True
       MenuVisible_44  =   -1  'True
-      MenuIcon_44     =   "frmMain.frx":1C222
+      MenuIcon_44     =   "frmMain.frx":1E1C7
       SubMenuID_44_0  =   0
       MenuID_45       =   44
       MenuText_45     =   "-"
       MenuVisible_45  =   -1  'True
-      MenuIcon_45     =   "frmMain.frx":1C242
+      MenuIcon_45     =   "frmMain.frx":1E1E7
       SubMenuID_45_0  =   0
       MenuID_46       =   45
       MenuText_46     =   "调用堆栈 (&C)       Ctrl+Alt+C"
       MenuCheckBox_46 =   -1  'True
       MenuVisible_46  =   -1  'True
-      MenuIcon_46     =   "frmMain.frx":1C262
+      MenuIcon_46     =   "frmMain.frx":1E207
       SubMenuID_46_0  =   0
       MenuID_47       =   46
       MenuText_47     =   "线程 (&T)           Ctrl+Alt+T"
       MenuCheckBox_47 =   -1  'True
       MenuVisible_47  =   -1  'True
-      MenuIcon_47     =   "frmMain.frx":1C282
+      MenuIcon_47     =   "frmMain.frx":1E227
       SubMenuID_47_0  =   0
       MenuID_48       =   47
       MenuText_48     =   "模块 (&M)           Ctrl+Alt+M"
       MenuCheckBox_48 =   -1  'True
       MenuVisible_48  =   -1  'True
-      MenuIcon_48     =   "frmMain.frx":1C2A2
+      MenuIcon_48     =   "frmMain.frx":1E4A0
       SubMenuID_48_0  =   0
       MenuID_49       =   48
       MenuText_49     =   "-"
       MenuVisible_49  =   -1  'True
-      MenuIcon_49     =   "frmMain.frx":1C2C2
+      MenuIcon_49     =   "frmMain.frx":1E564
       SubMenuID_49_0  =   0
       MenuID_50       =   49
       MenuText_50     =   "内存 (&E)           Ctrl+Alt+E"
       MenuCheckBox_50 =   -1  'True
       MenuVisible_50  =   -1  'True
-      MenuIcon_50     =   "frmMain.frx":1C2E2
+      MenuIcon_50     =   "frmMain.frx":1E584
       SubMenuID_50_0  =   0
       MenuID_51       =   50
       MenuText_51     =   "寄存器 (&R)         Ctrl+Alt+R"
       MenuCheckBox_51 =   -1  'True
       MenuVisible_51  =   -1  'True
-      MenuIcon_51     =   "frmMain.frx":1C302
+      MenuIcon_51     =   "frmMain.frx":1E667
       SubMenuID_51_0  =   0
       MenuID_52       =   51
       MenuText_52     =   "反汇编 (&D)         Ctrl+Alt+D"
       MenuCheckBox_52 =   -1  'True
       MenuVisible_52  =   -1  'True
-      MenuIcon_52     =   "frmMain.frx":1C322
+      MenuIcon_52     =   "frmMain.frx":1E687
       SubMenuID_52_0  =   0
       MenuID_53       =   52
       MenuText_53     =   "运行 (&R)           F5"
       MenuVisible_53  =   -1  'True
-      MenuIcon_53     =   "frmMain.frx":1C342
+      MenuIcon_53     =   "frmMain.frx":1E73D
       SubMenuID_53_0  =   0
       MenuID_54       =   53
       MenuText_54     =   "中断 (&B)           Ctrl+Alt+Break"
       MenuVisible_54  =   -1  'True
-      MenuIcon_54     =   "frmMain.frx":1C362
+      MenuIcon_54     =   "frmMain.frx":1E9C2
       SubMenuID_54_0  =   0
       MenuID_55       =   54
       MenuText_55     =   "停止 (&E)           Shift+F5"
       MenuVisible_55  =   -1  'True
-      MenuIcon_55     =   "frmMain.frx":1C382
+      MenuIcon_55     =   "frmMain.frx":1EA79
       SubMenuID_55_0  =   0
       MenuID_56       =   55
       MenuText_56     =   "重新运行 (&S)       Ctrl+Shift+F5"
       MenuVisible_56  =   -1  'True
-      MenuIcon_56     =   "frmMain.frx":1C3A2
+      MenuIcon_56     =   "frmMain.frx":1EB51
       SubMenuID_56_0  =   0
       MenuID_57       =   56
       MenuText_57     =   "-"
       MenuVisible_57  =   -1  'True
-      MenuIcon_57     =   "frmMain.frx":1C3C2
+      MenuIcon_57     =   "frmMain.frx":1EB71
       SubMenuID_57_0  =   0
       MenuID_58       =   57
       MenuText_58     =   "逐语句执行         F11"
       MenuVisible_58  =   -1  'True
-      MenuIcon_58     =   "frmMain.frx":1C3E2
+      MenuIcon_58     =   "frmMain.frx":1EB91
       SubMenuID_58_0  =   0
       MenuID_59       =   58
       MenuText_59     =   "逐过程执行         F10"
       MenuVisible_59  =   -1  'True
-      MenuIcon_59     =   "frmMain.frx":1C402
+      MenuIcon_59     =   "frmMain.frx":1EBB1
       SubMenuID_59_0  =   0
       MenuID_60       =   59
       MenuText_60     =   "执行到返回         Shift+F11"
       MenuVisible_60  =   -1  'True
-      MenuIcon_60     =   "frmMain.frx":1C422
+      MenuIcon_60     =   "frmMain.frx":1EBD1
       SubMenuID_60_0  =   0
       MenuID_61       =   60
       MenuText_61     =   "工具"
       MenuVisible_61  =   -1  'True
-      MenuIcon_61     =   "frmMain.frx":1C442
+      MenuIcon_61     =   "frmMain.frx":1EBF1
       SUBMENU_ITEM_COUNT_61=   5
       SubMenuID_61_0  =   0
       SubMenuText_61_1=   "窗口工具 (&W)"
@@ -567,32 +567,32 @@ Begin VB.Form frmMain
       MenuID_62       =   61
       MenuText_62     =   "窗口工具 (&W)"
       MenuVisible_62  =   -1  'True
-      MenuIcon_62     =   "frmMain.frx":1C462
+      MenuIcon_62     =   "frmMain.frx":1EC11
       SubMenuID_62_0  =   0
       MenuID_63       =   62
       MenuText_63     =   "消息拦截 (&M)"
       MenuVisible_63  =   -1  'True
-      MenuIcon_63     =   "frmMain.frx":1C482
+      MenuIcon_63     =   "frmMain.frx":1ECF5
       SubMenuID_63_0  =   0
       MenuID_64       =   63
       MenuText_64     =   "进程 (&P)"
       MenuVisible_64  =   -1  'True
-      MenuIcon_64     =   "frmMain.frx":1C4A2
+      MenuIcon_64     =   "frmMain.frx":1EDC9
       SubMenuID_64_0  =   0
       MenuID_65       =   64
       MenuText_65     =   "-"
       MenuVisible_65  =   -1  'True
-      MenuIcon_65     =   "frmMain.frx":1C4C2
+      MenuIcon_65     =   "frmMain.frx":1F042
       SubMenuID_65_0  =   0
       MenuID_66       =   65
       MenuText_66     =   "设置 (&O)"
       MenuVisible_66  =   -1  'True
-      MenuIcon_66     =   "frmMain.frx":1C4E2
+      MenuIcon_66     =   "frmMain.frx":1F062
       SubMenuID_66_0  =   0
       MenuID_67       =   66
       MenuText_67     =   "帮助"
       MenuVisible_67  =   -1  'True
-      MenuIcon_67     =   "frmMain.frx":1C502
+      MenuIcon_67     =   "frmMain.frx":1F263
       SUBMENU_ITEM_COUNT_67=   3
       SubMenuID_67_0  =   0
       SubMenuText_67_1=   "帮助文档 (&D)       F1"
@@ -604,17 +604,17 @@ Begin VB.Form frmMain
       MenuID_68       =   67
       MenuText_68     =   "帮助文档 (&D)       F1"
       MenuVisible_68  =   -1  'True
-      MenuIcon_68     =   "frmMain.frx":1C522
+      MenuIcon_68     =   "frmMain.frx":1F283
       SubMenuID_68_0  =   0
       MenuID_69       =   68
       MenuText_69     =   "示例程序 (&E)"
       MenuVisible_69  =   -1  'True
-      MenuIcon_69     =   "frmMain.frx":1C542
+      MenuIcon_69     =   "frmMain.frx":1F373
       SubMenuID_69_0  =   0
       MenuID_70       =   69
       MenuText_70     =   "关于拖控件大法 (&A) Ctrl+F1"
       MenuVisible_70  =   -1  'True
-      MenuIcon_70     =   "frmMain.frx":1C562
+      MenuIcon_70     =   "frmMain.frx":1F54E
       SubMenuID_70_0  =   0
    End
    Begin VB.PictureBox picToolBar 
@@ -702,22 +702,14 @@ Begin VB.Form frmMain
       TabIndex        =   1
       Top             =   0
       Width           =   16845
-      _ExtentX        =   29713
-      _ExtentY        =   873
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Microsoft YaHei UI"
-         Size            =   9
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Caption         =   "拖控件大法"
-      MaxButtonVisible=   0   'False
-      MinButtonVisible=   0   'False
-      BindCaption     =   -1  'True
-      Picture         =   "frmMain.frx":1C582
+      _extentx        =   29713
+      _extenty        =   873
+      font            =   "frmMain.frx":1FC6C
+      caption         =   "拖控件大法"
+      maxbuttonvisible=   0   'False
+      minbuttonvisible=   0   'False
+      bindcaption     =   -1  'True
+      picture         =   "frmMain.frx":1FCA0
    End
    Begin XtremeSkinFramework.SkinFramework SkinFramework 
       Left            =   14160
@@ -751,7 +743,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '获取窗口最大、最小化状态
-Private Declare Function GetWindowPlacement Lib "user32" (ByVal hWnd As Long, lpwndpl As WINDOWPLACEMENT) As Long
+Private Declare Function GetWindowPlacement Lib "user32" (ByVal hwnd As Long, lpwndpl As WINDOWPLACEMENT) As Long
 
 '创建进程
 Private Declare Function CreateProcess Lib "kernel32" Alias "CreateProcessA" (ByVal lpApplicationName As Long, ByVal lpCommandLine As String, _
@@ -766,55 +758,114 @@ Private Declare Function CreateProcess Lib "kernel32" Alias "CreateProcessA" (By
 '3      空白C++程序
 Public ProjectType          As Integer
 
-Public WindowObj            As Object                                                   '窗口自身
-Dim NewCreateWindow         As frmCreate                                                '“新建项目”窗体
+'当前调试状态
+'值     描述
+'0      设计状态
+'1      运行中
+'2      中断
+Public CurrState            As Byte
 
-Private WithEvents GdbPipe  As clsPipe                                                  'gdb调试管道
+Public WindowObj            As Object                                                   '窗口自身
+Dim NewCreateWindow         As frmCreateOptions                                         '“新建项目”窗体
+
+Public GdbPipe              As clsPipe                                                  'gdb调试管道
 Attribute GdbPipe.VB_VarHelpID = -1
+
+'描述:      在目标进程退出之后进行收尾工作
+'参数:      ExitCode: 程序的退出码
+Private Sub ProcessExitedHandler(ExitCode As Long)
+    Dim i                   As Long
+    
+    Me.tmrCheckProcess.Enabled = False                                                  '停止计时器
+    CurrState = 0                                                                       '更新调试状态
+    For i = 0 To UBound(CurrentProject.Files)                                           '把所有文件的中断行清掉
+        CurrentProject.Files(i).TargetWindow.BreakLine = -1
+        Call CurrentProject.Files(i).TargetWindow.RedrawBreakpoints
+    Next i
+    
+    frmOutput.OutputLog Lang_Main_Debug_Returned & ExitCode & "(0x" & Hex(ExitCode) & ")"
+                
+    GdbPipe.DosInput "q" & vbCrLf                                                       '关闭管道
+    Call ClearDebugWindows(True)                                                        '清空所有调试窗口的信息
+    
+    '禁用菜单项
+    'ToDo
+End Sub
+
+'描述:      清空所有调试窗口里面的信息
+'参数:      ClearBreakpoints: 可选的。指定是否清空断点列表里面的地址。通常在调试期间不需要清空断点列表，在调试完成后才需要
+Private Sub ClearDebugWindows(Optional ClearBreakpoints As Boolean = False)
+    If ClearBreakpoints Then                                                        '断点
+        Call frmBreakpoints.ClearEverything
+    End If
+    Call frmLocals.ClearEverything                                                  '本地
+    Call frmCallStack.ClearEverything                                               '调用堆栈
+End Sub
+
+'描述:      检查当前是否有未保存的文件
+'返回值:    如果有未保存的文件，则返回True
+Private Function IsSaveRequired() As Boolean
+    'On Error Resume Next       'todo
+    
+    IsSaveRequired = False
+    If CurrentProject.Changed Then                                              '工程文件需要保存
+        IsSaveRequired = True
+    Else                                                                        '有任意一个代码文件需要保存
+        Dim i               As Long
+        
+        For i = 0 To UBound(CurrentProject.Files)
+            If CurrentProject.Files(i).Changed Then
+                IsSaveRequired = True
+                Exit For
+            End If
+        Next i
+    End If
+End Function
 
 '描述:      “加载项目”菜单
 Private Sub mnuOpen_Click()
-    NoSkinMsgBox ShowOpen(Me.hWnd, "Dilidi - Open", "洗屁屁文件(*.cpp)" & vbNullChar & "*.cpp")
+    NoSkinMsgBox ShowOpen(Me.hwnd, "Dilidi - Open", "洗屁屁文件(*.cpp)" & vbNullChar & "*.cpp")
 End Sub
 
 '描述:      “保存”菜单
-Private Sub mnuSave_Click()
-    On Error Resume Next
+'返回值:    1=保存成功; 2=保存失败; 3=取消; 4=不保存
+Private Function mnuSave_Click() As Integer
     Dim i                   As Long
     
+    frmSaveBox.InitFileIndexMap                                                         '初始化序号映射表
+    If CurrentProject.Changed Then                                                      '当前工程文件被更改
+        frmSaveBox.AddFileIndexMap -1
+    End If
     For i = 0 To UBound(CurrentProject.Files)                                           '检查还没有保存的文件
-        If CurrentProject.Files(i).Changed = True Then                                      '逐个保存未保存的文件
-            Open CurrentProject.Files(i).FilePath For Output As #1
-                If Err.Number <> 0 Then                                                             '保存文件失败
-                    Close #1
-                    If NoSkinMsgBox(Lang_Main_SaveFailure_1 & CurrentProject.Files(i).FilePath & " :" & _
-                       Err.Number & " - " & Err.Description & Lang_Main_saveFailure_2, vbExclamation, Lang_Msgbox_Error) = vbNo Then
-                        Exit Sub
-                    End If
-                End If
-                Print #1, CurrentProject.Files(i).TargetWindow.SyntaxEdit.Text
-            Close #1
-            CurrentProject.Files(i).Changed = False                                             '标记文件为已保存
+        If CurrentProject.Files(i).Changed Then                                             '检查到还没有保存的文件
+            frmSaveBox.AddFileIndexMap i
         End If
     Next i
-    
-    If CurrentProject.Changed Then                                                      '如果工程文件尚未保存
-        'ToDo
-        Open ProjectFilePath For Binary As #1                                               '保存工程文件
-            If Err.Number <> 0 Then
-                Close #1
-                NoSkinMsgBox Lang_Main_SaveFailure_1 & ProjectFilePath & " :" & Err.Number & " - " & Err.Description, vbExclamation, Lang_Msgbox_Error
-                Exit Sub
-            End If
-            'Put #1, , CurrentProject
-        Close #1
-        CurrentProject.Changed = False                                                          '标记工程文件为已保存
+    If frmSaveBox.lstFiles.ListCount = 0 Then                                           '如果没有文件需要保存
+        Exit Function
     End If
-End Sub
+    For i = 0 To frmSaveBox.lstFiles.ListCount - 1                                      '勾选所有文件
+        frmSaveBox.lstFiles.Selected(i) = True
+    Next i
+    frmSaveBox.bSaveFlag = 0                                                            '初始化保存结果
+    frmSaveBox.bBlock = True                                                            '阻塞代码执行
+    Me.Enabled = False
+    frmSaveBox.Show
+    SetWindowPos frmSaveBox.hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE Or SWP_NOMOVE    '让保存对话框置顶
+    Do                                                                                  '等待保存对话框关闭
+        Sleep 50
+        DoEvents
+    Loop Until Not frmSaveBox.bBlock
+    mnuSave_Click = frmSaveBox.bSaveFlag                                                '返回保存结果
+    If mnuSave_Click = 0 Then                                                           '没有选择操作则视为取消
+        mnuSave_Click = 3
+    End If
+    Unload frmSaveBox                                                                   '卸载掉保存对话框，释放资源
+End Function
 
 '描述:      “另存为”菜单
 Private Sub mnuSaveAs_Click()
-    NoSkinMsgBox ShowSave(Me.hWnd, "Shar.cpp", "Save", "fsaf(*.cpp)" & vbNullChar & "*.cpp")
+    NoSkinMsgBox ShowSave(Me.hwnd, "Shar.cpp", "Save", "fsaf(*.cpp)" & vbNullChar & "*.cpp")
 End Sub
 
 '描述:      “新建项目”菜单
@@ -823,14 +874,16 @@ Private Sub mnuNewProject_Click()
         Unload NewCreateWindow
         Set NewCreateWindow = Nothing
     End If
-    Set NewCreateWindow = New frmCreate
+    Set NewCreateWindow = New frmCreateOptions
+    Unload frmCreate
     Me.Enabled = False
     Me.DarkWindowBorderSizer.Bind = False
-    SetParent NewCreateWindow.hWnd, 0
+    SetParent NewCreateWindow.hwnd, 0
     NewCreateWindow.Move Screen.Width / 2 - frmCreate.Width / 2, Screen.Height / 2 - frmCreate.Height / 2
     NewCreateWindow.DarkTitleBar_NoDrop.Visible = True
     NewCreateWindow.DarkWindowBorder.Bind = True
     NewCreateWindow.Show
+    NewCreateWindow.TypeOption(1).Focused = True
 End Sub
 
 '描述:      “运行”菜单
@@ -843,43 +896,64 @@ Private Sub mnuRun_Click()
     Dim PipeOutput          As String                                           '管道输出的内容
     Dim GccOutputContent()  As String                                           '逐行分开的g++输出内容
     Dim i                   As Long
+    Dim MsgBoxRtn           As VbMsgBoxResult                                   '保存确认框的返回值
+    Dim SaveRtn             As Integer                                          '保存返回值
     
-    '提示保存文件
-    Dim NeedToSaveFiles     As Boolean                                          '是否需要提示保存文件
-    If CurrentProject.Changed Then                                              '如果工程文件需要保存，就提示保存文件
-        NeedToSaveFiles = True
-    Else                                                                        '或者有任意一个代码文件需要保存，就提示保存文件
-        For i = 0 To UBound(CurrentProject.Files)
-            If CurrentProject.Files(i).Changed Then
-                NeedToSaveFiles = True
-                Exit For
-            End If
-        Next i
+    If CurrState = 2 Then                                                       '处于中断状态
+        Call ClearDebugWindows                                                      '清空所有调试窗口的信息
+        GdbPipe.DosInput "continue" & vbCrLf                                        '发送继续运行命令
+        Exit Sub
     End If
-    If NeedToSaveFiles Then                                                     '提示保存文件
-        If NoSkinMsgBox(Lang_Main_SaveBeforeCompile, vbQuestion Or vbYesNo, Lang_Msgbox_Confirm) = vbYes Then
-            Call mnuSave_Click
+    
+    If IsSaveRequired() Then                                                    '提示保存文件
+        MsgBoxRtn = NoSkinMsgBox(Lang_Main_SaveBeforeCompile, vbQuestion Or vbYesNoCancel, Lang_Msgbox_Confirm)
+        If MsgBoxRtn = vbYes Then
+            SaveRtn = mnuSave_Click()
+            If SaveRtn = 2 Then                                                         '保存时出错
+                If NoSkinMsgBox(Lang_Main_SaveFailedBeforeCompile, vbQuestion Or vbYesNo, Lang_Msgbox_Confirm) = vbNo Then
+                    frmOutput.OutputLog Lang_Main_DebugAborted
+                    Exit Sub
+                End If
+            ElseIf SaveRtn = 3 Or SaveRtn = 4 Then                                      '用户取消保存 或者 用户选择不保存 则取消接下来的操作
+                frmOutput.OutputLog Lang_Main_DebugAborted
+                Exit Sub
+            End If
+        ElseIf MsgBoxRtn = vbCancel Then
+            frmOutput.OutputLog Lang_Main_DebugAborted                              '用户选择取消调试
+            Exit Sub
         End If
     End If
+    '======================================================================
+    
+    ExePath = ProjectFolderPath & CurrentProject.ProjectName & ".exe"
+    If Dir(ExePath, vbNormal Or vbReadOnly Or vbHidden Or vbSystem) <> "" Then  '检测到同名的exe文件
+        If NoSkinMsgBox(Lang_Main_ReplaceExe_1 & ExePath & Lang_Main_ReplaceExe_2, vbQuestion Or vbYesNo, Lang_Msgbox_Confirm) = vbYes Then
+            Kill ExePath                                                                '删除掉同名文件
+        Else
+            frmOutput.OutputLog Lang_Main_DebugAborted
+            Exit Sub
+        End If
+    End If
+    frmOutput.edOutput.Text = ""                                                '清空输出
+    '======================================================================
     
     '使用g++进行编译
     '                   ↓转到当前程序所在的盘符                    ↓调用g++.exe进行编译      ↓编译为调试程序           ↓所有的cpp代码文件
-'命令格式: cmd /c 【盘符】: && cd "【g++.exe所在目录】" && "【g++.exe路径】" [-mwindows] -g -o "【输出路径】" "【cpp文件1】" "【cpp文件2】"
+    '命令格式: cmd /c 【盘符】: && cd "【g++.exe所在目录】" && "【g++.exe路径】" [-mwindows] -g -o "【输出路径】" "【cpp文件1】" "【cpp文件2】"
     '                                       ↑转到g++.exe所在的目录                 ↑是否为命令行程序   ↑编译的EXE输出路径
-    frmOutput.OutputLog Lang_Main_StartingGcc
-    ExePath = ProjectFolderPath & CurrentProject.ProjectName & ".exe"
-    GccCmdLine = "cmd /c " & Left(GetAppPath(), 1) & ": && " & _
-    "cd """ & GetAppPath() & "GCC\bin"" && " & _
-    """" & GetAppPath() & "GCC\bin\g++.exe"" -g -o """ & ExePath & """"
+    GccCmdLine = "cmd /c " & Left(GccPath, 1) & ": && " & _
+        "cd """ & Left(GccPath, InStrRev(GccPath, "\")) & """ && " & _
+        """" & GccPath & """ -static -g -o """ & ExePath & """"
     For i = 0 To UBound(CurrentProject.Files)
-        If Not CurrentProject.Files(i).IsHeaderFile Then
+        If Not Right(CurrentProject.Files(i).FilePath, 2) = ".h" And Not Right(CurrentProject.Files(i).FilePath, 4) = ".hpp" Then
             GccCmdLine = GccCmdLine & " """ & CurrentProject.Files(i).FilePath & """"
         End If
     Next i
-    If GccPipe.InitDosIO(GccCmdLine) = 0 Then
-        frmOutput.OutputLog Lang_Main_GccStartFailed
+    If GccPipe.InitDosIO(GccCmdLine) = 0 Then                                   'g++管道启动失败
+        frmOutput.OutputLog Lang_Main_GccStartFailed & GccCmdLine
+        Exit Sub
     End If
-    frmMain.DarkMenu.HideMenu                                                   '先隐藏菜单
+    frmOutput.OutputLog Lang_Main_StartingGcc & GccCmdLine
     Do While ProcessExists(GccPipe.hProcess)                                    '等待g++执行完成
         Sleep 50
         DoEvents
@@ -899,6 +973,7 @@ Private Sub mnuRun_Click()
     Else
         frmOutput.OutputLog Lang_Main_CompileSucceed & ExePath
     End If
+    '======================================================================
     
     '创建待调试进程。该进程启动之后会挂起，等待gdb附加
     Dim si                  As STARTUPINFO                                      '进程启动信息
@@ -915,38 +990,95 @@ Private Sub mnuRun_Click()
         frmOutput.OutputLog Lang_Main_RunFailed & ExePath & " (" & Err.LastDllError & ")"
         Exit Sub
     End If
+    frmOutput.OutputLog Lang_Main_RunSucceed & DebugProgramInfo.dwProcessId & "(" & Hex(DebugProgramInfo.dwProcessId) & ")"
+    '======================================================================
     
     '创建gdb管道
     Set GdbPipe = New clsPipe
-    If GdbPipe.InitDosIO(GetAppPath() & "GCC\gdb\gdb.exe -q -nw") = 0 Then      '创建gdb调试管道失败
-        TerminateProcess DebugProgramInfo.hProcess, 0                           '杀掉待调试进程，放弃调试
-        Set GdbPipe = Nothing                                                   '关闭gdb管道
+    If GdbPipe.InitDosIO(GdbPath & " -q -nw") = 0 Then                          '创建gdb调试管道失败
+        TerminateProcess DebugProgramInfo.hProcess, 0                               '杀掉待调试进程，放弃调试
+        Set GdbPipe = Nothing                                                       '关闭gdb管道
         frmOutput.OutputLog Lang_Main_GdbFailed
         Exit Sub
     End If
+    frmOutput.OutputLog Lang_Main_GdbSucceed & GdbPipe.dwProcessId & "(" & Hex(GdbPipe.dwProcessId) & ")"
+    '======================================================================
+    
+    frmOutput.OutputLog Lang_Main_GdbLoadingSymbols_1 & ExePath & Lang_Main_GdbLoadingSymbols_2
     GdbPipe.DosInput "file """ & Replace(ExePath, "\", "/") & """" & vbCrLf     '从exe文件读取符号
-    GdbPipe.DosOutput PipeOutput, "." & vbCrLf & "(gdb) "                       '获取gdb的输出
+    GdbPipe.DosOutput PipeOutput, "(gdb) ", 5000                                '获取gdb的输出
     If InStr(PipeOutput, "no debugging symbols found") <> 0 Or _
-        InStr(PipeOutput, "No such file or directory") <> 0 Then                'gdb输出“no debugging symbols found”或者“No such file or directory”，加载符号失败
-        frmOutput.OutputLog CStr(Split(PipeOutput, vbCrLf)(0))                  '输出加载符号的错误
-        If MsgBox(Lang_Main_GdbLoadSymbolsFailure_1 & ExePath & Lang_Main_GdbLoadSymbolsFailure_2, vbExclamation Or vbYesNo, Lang_Msgbox_Confirm) = vbNo Then
-            TerminateProcess DebugProgramInfo.hProcess, 0                       '杀掉待调试进程，放弃调试
-            Set GdbPipe = Nothing                                               '关闭gdb管道
+        InStr(PipeOutput, "No such file or directory") <> 0 Then                    'gdb输出“no debugging symbols found”或者“No such file or directory”，加载符号失败
+        frmOutput.OutputLog CStr(Split(PipeOutput, vbCrLf)(0))                      '输出加载符号的错误
+        If NoSkinMsgBox(Lang_Main_GdbLoadSymbolsFailure_1 & ExePath & Lang_Main_GdbLoadSymbolsFailure_2, vbExclamation Or vbYesNo, Lang_Msgbox_Confirm) = vbNo Then
+            TerminateProcess DebugProgramInfo.hProcess, 0                               '杀掉待调试进程，放弃调试
+            Set GdbPipe = Nothing                                                       '关闭gdb管道
+            frmOutput.OutputLog Lang_Main_DebugAborted
             Exit Sub
         End If
     End If
+    '======================================================================
+    
     GdbPipe.DosInput "set pagination off" & vbCrLf                              '关闭gdb的"Type to continue, or q to quit"消息
+    GdbPipe.DosInput "set print repeats 0" & vbCrLf                             '关闭gdb对于重复的数组元素的“<repeats n times>”输出
+    '======================================================================
+    
+    frmOutput.OutputLog Lang_Main_GdbAttaching
     GdbPipe.DosInput "attach " & DebugProgramInfo.dwProcessId & vbCrLf          '附加到待调试进程
     GdbPipe.DosOutput PipeOutput, "(gdb) "                                      '获取gdb的输出
     If InStr(PipeOutput, "Can't attach") <> 0 Then                              'gdb输出“Can't attach to process.”，附加进程失败
-        TerminateProcess DebugProgramInfo.hProcess, 0                           '杀掉待调试进程，放弃调试
-        Set GdbPipe = Nothing                                                   '关闭gdb管道
+        TerminateProcess DebugProgramInfo.hProcess, 0                               '杀掉待调试进程，放弃调试
+        Set GdbPipe = Nothing                                                       '关闭gdb管道
         frmOutput.OutputLog Lang_Main_GdbAttachFailed_1 & DebugProgramInfo.dwProcessId & "(" & Hex(DebugProgramInfo.dwProcessId) & ") " & Lang_Main_GdbAttachFailed_2
+        frmOutput.OutputLog Lang_Main_DebugAborted
         Exit Sub
     End If
+    GdbPipe.DosOutput PipeOutput, "(gdb) ", 5000                                '等待gdb输出完成，超时5秒
+    '======================================================================
+    
+    Dim j                   As Long
+    Dim k                   As Long
+    Dim CurrFilePath        As String                                           '把所有“\”替换成“/”的文件路径，并以“:”结尾，以便添加行号
+    Dim SplitTmp()          As String                                           '字符串分割缓存
+    Dim BreakpointAdded     As Boolean                                          '断点是否成功添加
+    
+    ReDim GdbBreakpoints(0)                                                     '初始化断点映射表
+    For i = 0 To UBound(CurrentProject.Files)                                   '添加所有文件的断点
+        CurrFilePath = Replace(CurrentProject.Files(i).FilePath, "\", "/") & """:"
+        For j = 0 To UBound(CurrentProject.Files(i).Breakpoints) - 1                '为啥 - 1: 因为断点列表里的最后一个是没用的
+            GdbPipe.ClearPipe                                                           '清理管道
+            GdbPipe.DosInput "b """ & CurrFilePath & CStr(CurrentProject.Files(i).Breakpoints(j).CodeLn) & vbCrLf
+            GdbPipe.DosOutput PipeOutput, "(gdb) "                                      '获取gdb的输出
+            SplitTmp = Split(PipeOutput, vbCrLf)                                        '把输出逐行分开
+            BreakpointAdded = False                                                     '先把断点成功添加标记为False
+            For k = 0 To UBound(SplitTmp)                                               '逐行分析
+                PipeOutput = SplitTmp(k)
+                If PipeOutput Like "Breakpoint * at *, line *" Then                         '添加断点成功则获取断点信息
+                    BreakpointAdded = True
+                    SplitTmp = Split(Split(PipeOutput, "Breakpoint ")(1), " at ")
+                    If CLng(SplitTmp(0) > UBound(GdbBreakpoints)) Then                          '检查gdb断点映射表的大小是否足够，不够则多分配一个
+                        ReDim Preserve GdbBreakpoints(CLng(SplitTmp(0)))
+                    End If
+                    GdbBreakpoints(CLng(SplitTmp(0))).FileIndex = i                             '记录gdb断点所对应的文件序号和断点序号
+                    GdbBreakpoints(CLng(SplitTmp(0))).BreakpointIndex = j
+                    frmBreakpoints.lvBreakpoints.SetItemText CStr(Split(SplitTmp(1), ": file")(0)), CurrentProject.Files(i).Breakpoints(j).ListViewIndex, 2
+                    Exit For
+                ElseIf PipeOutput Like "No line * in file *" Then                           '没有指定的行号（“No line * in file "*".”）
+                    frmOutput.OutputLog Lang_Main_GdbBreakpointError_1 & CurrentProject.Files(i).FilePath & _
+                        Lang_Main_GdbBreakpointError_2 & Replace(Split(PipeOutput, " in file """)(0), "No line ", "") & Lang_Main_GdbBreakpointError_3
+                End If
+            Next k
+            If Not BreakpointAdded Then
+                frmBreakpoints.lvBreakpoints.SetItemText Lang_Main_GdbBreakpoint_Invalid, CurrentProject.Files(i).Breakpoints(j).ListViewIndex, 2
+            End If
+        Next j
+    Next i
+    '======================================================================
+    
     GdbPipe.DosInput "continue" & vbCrLf                                        '使目标进程继续运行
-    frmOutput.OutputLog Lang_Main_DebugInfo_1 & GdbPipe.dwProcessId & "(" & Hex(GdbPipe.dwProcessId) & "); " & _
-    Right(ExePath, Len(ExePath) - InStrRev(ExePath, "\")) & Lang_Main_DebugInfo_2 & DebugProgramInfo.dwProcessId & "(" & Hex(DebugProgramInfo.dwProcessId) & ")"
+    ResumeThread DebugProgramInfo.hThread                                       '继续执行目标进程的主线程
+    frmOutput.OutputLog Lang_Main_RunningInfo_1 & DebugProgramInfo.dwProcessId & "(" & Hex(DebugProgramInfo.dwProcessId) & ") " & Lang_Main_RunningInfo_2
+    CurrState = 1                                                               '更新调试状态
     Me.tmrCheckProcess.Enabled = True                                           '开始等待进程结束
 End Sub
 
@@ -966,14 +1098,15 @@ End Sub
 
 '描述:      显示启动界面
 Public Sub ShowStartupPage()
-    frmCreate.DarkTitleBar_NoDrop.Visible = False                                              '不显示标题栏和边框
+    frmCreate.DarkTitleBar_NoDrop.Visible = False                                       '不显示标题栏和边框
     frmCreate.DarkWindowBorder.Bind = False
-    SetParent frmCreate.hWnd, Me.picClientArea.hWnd                                     '让“新建项目”作为本窗体的子窗体
+    SetParent frmCreate.hwnd, Me.picClientArea.hwnd                                     '让“新建项目”作为本窗体的子窗体
     frmCreate.Move 0, 0                                                                 '设置其位置
     frmCreate.Show
 End Sub
 
 Private Sub DarkMenu_MenuItemClicked(MenuID As Integer)
+    Me.DarkMenu.HideMenu                                                            '按下菜单后就立即隐藏菜单
     Select Case MenuID
         Case 1                                                                          '新建
             Call mnuNewProject_Click
@@ -990,6 +1123,12 @@ Private Sub DarkMenu_MenuItemClicked(MenuID As Integer)
         Case 39                                                                         '断点列表
             Me.DockingPane.ShowPane 6
         
+        Case 42                                                                         '本地
+            Me.DockingPane.ShowPane 8
+        
+        Case 45                                                                         '调用堆栈
+            Me.DockingPane.ShowPane 10
+        
         Case 52                                                                         '运行
             Call mnuRun_Click
         
@@ -997,6 +1136,8 @@ Private Sub DarkMenu_MenuItemClicked(MenuID As Integer)
 End Sub
 
 Private Sub DockingPane_Resize()
+    'On Error Resume Next       'todo
+    
     If ProjectType <> 0 Then                                                            '如果不是在启动界面的话就调整窗口活动客户区大小
         Dim cLeft   As Long, cRight   As Long, cTop   As Long, cBottom   As Long
         
@@ -1013,13 +1154,19 @@ Private Sub Form_Initialize()
     
     '启动LOGO
     frmStartupLogo.Show
-    SetWindowPos frmStartupLogo.hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE Or SWP_NOMOVE
+    SetWindowPos frmStartupLogo.hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE Or SWP_NOMOVE
     frmStartupLogo.SetFocus
+    frmStartupLogo.Refresh
+    
+    '创建工具提示文本窗口
+    If CreateToolTip() = 0 Then
+        MsgBox "创建工具提示文本窗口失败！", vbCritical, "错误"
+    End If
 
     '由于字符串资源必须比用户控件更早加载，用户控件才能使用这些字符串资源，于是放在Initialize事件而不是Load事件
     '加载字符串资源
     If Not LoadLanguage(1001) Then
-        NoSkinMsgBox "加载字符串资源失败！" & Err.Number & ": " & Err.Description, vbCritical, Lang_Msgbox_Error
+        MsgBox "加载字符串资源失败！" & Err.Number & ": " & Err.Description, vbCritical, "错误"
     End If
 End Sub
 
@@ -1034,7 +1181,7 @@ Private Sub Form_Load()
     
     '加载菜单文本
     If Not LoadLanguage(1001, True) Then
-        NoSkinMsgBox "加载字符串资源失败！" & Err.Number & ": " & Err.Description, vbCritical, Lang_Msgbox_Error
+        MsgBox "加载字符串资源失败！" & Err.Number & ": " & Err.Description, vbCritical, Lang_Msgbox_Error
     End If
     
     '调整“客户区”
@@ -1045,54 +1192,54 @@ Private Sub Form_Load()
     Dim ClientHeight        As Integer, ClientWidth             As Integer
     Dim i                   As Integer
     
-    Me.DockingPane.AttachToWindow Me.picClientArea.hWnd                                                                 '绑定工作区
+    Me.DockingPane.AttachToWindow Me.picClientArea.hwnd                                                                 '绑定工作区
     ClientHeight = Me.picClientArea.ScaleHeight / Screen.TwipsPerPixelY
     ClientWidth = Me.picClientArea.ScaleWidth / Screen.TwipsPerPixelX
     Me.DockingPane.CreatePane 1, 100, ClientHeight, DockLeftOf                                                          '控件箱
-    Me.DockingPane(1).Handle = frmControlBox.hWnd
-    Me.DockingPane(1).Title = "控件箱"
+    Me.DockingPane(1).Handle = frmControlBox.hwnd
+    Me.DockingPane(1).Title = Lang_ControlBox_Caption
     Me.DockingPane.CreatePane 2, 250, ClientHeight / 2, DockRightOf                                                     '属性
-    Me.DockingPane(2).Handle = frmProperties.hWnd
-    Me.DockingPane(2).Title = "属性"
+    Me.DockingPane(2).Handle = frmProperties.hwnd
+    Me.DockingPane(2).Title = Lang_Properties_Caption
     Me.DockingPane.CreatePane 3, 250, ClientHeight / 2, DockRightOf                                                     '工程资源管理器
-    Me.DockingPane(3).Handle = frmSolutionExplorer.hWnd
-    Me.DockingPane(3).Title = "工程资源管理器"
+    Me.DockingPane(3).Handle = frmSolutionExplorer.hwnd
+    Me.DockingPane(3).Title = Lang_SolutionExplorer_Caption
     Me.DockingPane.CreatePane 4, ClientWidth / 2, 120, DockBottomOf Or DockLeftOf                                       '错误列表
-    Me.DockingPane(4).Handle = frmErrorList.hWnd
-    Me.DockingPane(4).Title = "错误列表"
+    Me.DockingPane(4).Handle = frmErrorList.hwnd
+    Me.DockingPane(4).Title = Lang_ErrorList_Caption
     Me.DockingPane.CreatePane 5, ClientWidth / 2, 120, DockBottomOf Or DockRightOf                                      '输出
-    Me.DockingPane(5).Handle = frmOutput.hWnd
-    Me.DockingPane(5).Title = "输出"
+    Me.DockingPane(5).Handle = frmOutput.hwnd
+    Me.DockingPane(5).Title = Lang_Output_Caption
     Me.DockingPane.CreatePane 6, ClientWidth / 2, 120, DockBottomOf Or DockRightOf                                      '断点列表
-    Me.DockingPane(6).Handle = frmBreakpoints.hWnd
-    Me.DockingPane(6).Title = "断点列表"
+    Me.DockingPane(6).Handle = frmBreakpoints.hwnd
+    Me.DockingPane(6).Title = Lang_Breakpoints_Caption
     Me.DockingPane.CreatePane 7, ClientWidth / 2, 120, DockBottomOf                                                     '监视窗口
-    Me.DockingPane(7).Handle = frmWatch.hWnd
-    Me.DockingPane(7).Title = "监视窗口"
+    Me.DockingPane(7).Handle = frmWatch.hwnd
+    Me.DockingPane(7).Title = Lang_Watch_Caption
     Me.DockingPane.CreatePane 8, ClientWidth / 2, 120, DockBottomOf                                                     '本地
-    Me.DockingPane(8).Handle = frmLocals.hWnd
-    Me.DockingPane(8).Title = "本地"
+    Me.DockingPane(8).Handle = frmLocals.hwnd
+    Me.DockingPane(8).Title = Lang_Locals_Caption
     Me.DockingPane.CreatePane 9, ClientWidth / 2, 120, DockBottomOf                                                     '立即窗口
-    Me.DockingPane(9).Handle = frmImmediate.hWnd
-    Me.DockingPane(9).Title = "立即窗口"
+    Me.DockingPane(9).Handle = frmImmediate.hwnd
+    Me.DockingPane(9).Title = Lang_Immediate_Caption
     Me.DockingPane.CreatePane 10, ClientWidth / 2, 120, DockBottomOf                                                    '调用堆栈
-    Me.DockingPane(10).Handle = frmCallStack.hWnd
-    Me.DockingPane(10).Title = "调用堆栈"
+    Me.DockingPane(10).Handle = frmCallStack.hwnd
+    Me.DockingPane(10).Title = Lang_CallStack_Caption
     Me.DockingPane.CreatePane 11, ClientWidth / 2, 120, DockBottomOf                                                    '线程
-    Me.DockingPane(11).Handle = frmThreads.hWnd
-    Me.DockingPane(11).Title = "线程"
+    Me.DockingPane(11).Handle = frmThreads.hwnd
+    Me.DockingPane(11).Title = Lang_Threads_Caption
     Me.DockingPane.CreatePane 12, ClientWidth / 2, 120, DockBottomOf                                                    '模块
-    Me.DockingPane(12).Handle = frmModules.hWnd
-    Me.DockingPane(12).Title = "模块"
+    Me.DockingPane(12).Handle = frmModules.hwnd
+    Me.DockingPane(12).Title = Lang_Modules_Caption
     Me.DockingPane.CreatePane 13, ClientWidth / 2, 250, DockBottomOf                                                    '内存
-    Me.DockingPane(13).Handle = frmMemory.hWnd
-    Me.DockingPane(13).Title = "内存"
+    Me.DockingPane(13).Handle = frmMemory.hwnd
+    Me.DockingPane(13).Title = Lang_Memory_Caption
     Me.DockingPane.CreatePane 14, ClientWidth / 2, 250, DockBottomOf                                                    '寄存器
-    Me.DockingPane(14).Handle = frmRegisters.hWnd
-    Me.DockingPane(14).Title = "寄存器"
+    Me.DockingPane(14).Handle = frmRegisters.hwnd
+    Me.DockingPane(14).Title = Lang_Registers_Caption
     Me.DockingPane.CreatePane 15, ClientWidth / 2, 250, DockBottomOf                                                    '反汇编
-    Me.DockingPane(15).Handle = frmDisassembly.hWnd
-    Me.DockingPane(15).Title = "反汇编"
+    Me.DockingPane(15).Handle = frmDisassembly.hwnd
+    Me.DockingPane(15).Title = Lang_Disassembly_Caption
     For i = 1 To 15                                                                                                     '隐藏所有的Pane
         Me.DockingPane(i).Close
     Next i
@@ -1103,14 +1250,19 @@ Private Sub Form_Load()
     Me.DockingPane.Options.ThemedFloatingFrames = True                                                                  '作为弹窗时边框保持样式
     Me.DockingPane.Options.ShowContentsWhileDragging = True
     If DockingPaneGlobalSettings.ResourceImages.LoadFromFile(GetAppPath & "Skin.dll", "Office2010Black.ini") = False Then
-        NoSkinMsgBox "加载样式失败！", vbCritical, "错误"
+        MsgBox "加载样式失败！", vbCritical, Lang_Msgbox_Error
     End If
     Me.DockingPane.VisualTheme = ThemeResource                                                                          '设置为从资源文件读取样式
     Me.DockingPane.PaintManager.SplitterSize = 2                                                                        '设置分割区域的大小
     
     'If Not Me.SkinFramework.LoadSkin("Skin.cjstyles", "NormalBlue.ini") Then                                            '加载皮肤 [ToDo]
-    '    NoSkinMsgBox "加载皮肤失败！", vbCritical, "错误"
+        'MsgBox "加载皮肤失败！", vbCritical, Lang_Msgbox_Error todo: multi language
     'End If
+    
+    'todo 删掉-----------------
+    GccPath = "C:\Program Files (x86)\MinGW\bin\g++.exe"
+    GdbPath = "C:\Program Files (x86)\MinGW\bin\gdb.exe"
+    '--------------------------
     
     '禁用不需要的菜单
     Me.DarkMenu.MenuEnabled(3) = False                                                                                  '保存
@@ -1124,7 +1276,7 @@ Private Sub Form_Load()
     Dim lpObj               As Long                                                                                     '指向窗口自身的物件指针
     Set WindowObj = Me
     lpObj = ObjPtr(WindowObj)                                                                                           '获取指向窗口自身的物件指针
-    SetPropA Me.hWnd, "WindowObj", lpObj                                                                                '记录窗口的物件地址，供子类化卸载窗体用
+    SetPropA Me.hwnd, "WindowObj", lpObj                                                                                '记录窗口的物件地址，供子类化卸载窗体用
     'SetPropA Me.hWnd, "PrevWndProc", SetWindowLongA(Me.hWnd, GWL_WNDPROC, AddressOf MainWindowMaximizeCloseFixProc)    '[ToDo]
     
     '显示启动页面
@@ -1161,11 +1313,29 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     
     '如果创建了工程，则检查是否有文件未保存
     If CurrentProject.ProjectType <> 0 Then
-        'ToDo
+        If IsSaveRequired() Then
+            Dim SaveRtn     As Integer                      '保存返回值
+            
+            SaveRtn = mnuSave_Click()
+            If SaveRtn = 2 Or SaveRtn = 3 Then              '保存出错或者用户取消保存
+                Cancel = 1
+                Exit Sub
+            End If
+        End If
     End If
     
     '恢复窗口子类化
-    SetWindowLongA Me.hWnd, GWL_WNDPROC, GetPropA(Me.hWnd, "PrevWndProc")
+    SetWindowLongA Me.hwnd, GWL_WNDPROC, GetPropA(Me.hwnd, "PrevWndProc")
+    
+    '关闭工具提示文本窗口
+    Call DestroyToolTip
+    
+    '关闭管道
+    Me.tmrCheckProcess.Enabled = False                      '停止计时器
+    If Not GdbPipe Is Nothing Then
+        GdbPipe.StopRecvOutput
+        GdbPipe.CloseDosIO
+    End If
     
     '关闭所有窗口
     Dim CodeWindow  As Form
@@ -1205,11 +1375,11 @@ Private Sub Form_Resize()
     Dim wp      As WINDOWPLACEMENT
     
     For Each Target In Forms
-        If GetPropA(Target.hWnd, "Parent") = Me.picWindowClientArea.hWnd Then
-            GetWindowPlacement Target.hWnd, wp
+        If GetPropA(Target.hwnd, "Parent") = Me.picWindowClientArea.hwnd Then
+            GetWindowPlacement Target.hwnd, wp
             If wp.ShowCmd = SW_MAXIMIZE Then
-                ShowWindow Target.hWnd, SW_HIDE
-                ShowWindow Target.hWnd, SW_MAXIMIZE
+                ShowWindow Target.hwnd, SW_HIDE
+                ShowWindow Target.hwnd, SW_MAXIMIZE
             End If
         End If
     Next Target
@@ -1237,3 +1407,107 @@ Private Sub TabBar_WindowDropOut(Frm As Form, Index As Integer)
     Frm.SyntaxEdit.SetFocus
 End Sub
 
+Private Sub tmrCheckProcess_Timer()
+    On Error Resume Next
+    Dim PipeOutput                  As String                                       '管道输出内容
+    Dim PipeOutputLine()            As String                                       '管道输出的每一行
+    Dim SplitTmp                    As String                                       '字符串分割缓存
+    Dim ExitCode                    As Long                                         '进程退出码
+    Dim i                           As Long
+    
+    If Not ProcessExists(GdbPipe.hProcess) Then
+        frmOutput.OutputLog "gdb进程" & GdbPipe.dwProcessId & "(" & Hex(GdbPipe.dwProcessId) & ") " & "意外退出！调试被迫结束。"
+        frmOutput.OutputLog "将试图强制结束调试进程" & DebugProgramInfo.dwProcessId & "(" & Hex(DebugProgramInfo.dwProcessId) & ")"
+        If TerminateProcess(DebugProgramInfo.hProcess, 0) = 0 Then
+            frmOutput.OutputLog "结束进程" & DebugProgramInfo.dwProcessId & "(" & Hex(DebugProgramInfo.dwProcessId) & ") " & "失败！请自行结束该进程。"
+        End If
+        Call ProcessExitedHandler(0)
+        Exit Sub
+    End If
+    If GdbPipe.DosOutput(PipeOutput, "(gdb) ") = 1 Then                             '获取gdb是否有新消息
+        PipeOutputLine = Split(PipeOutput, vbCrLf)                                      '分割出gdb输出的每一行
+        For i = 0 To UBound(PipeOutputLine)                                             '遍历输出的每一行
+            PipeOutput = PipeOutputLine(i)
+            If PipeOutput Like "*Breakpoint *,*at*" Then                                    '断点命中消息（Breakpoint *, * at *:*）
+                Dim BreakpointIndex     As Long                                                 '当前命中的断点的序号（gdb）
+                Dim bSourceFileFound    As Boolean                                              '能否找到对应的代码文件
+                Dim SourceLn            As Long                                                 '对应的代码行号
+                
+                CurrState = 2                                                                   '更新调试状态
+                SplitTmp = Split(PipeOutput, "Breakpoint ")(1)                                  '（Breakpoint [*, * at *:*]）
+                BreakpointIndex = CLng(Split(SplitTmp, ", ")(0))                                '（[*], * at *:*）
+                SplitTmp = Right(SplitTmp, Len(SplitTmp) - InStr(SplitTmp, " at "))             '（Breakpoint *, * at [*:*]）
+                SourceLn = CLng(Right(SplitTmp, Len(SplitTmp) - InStrRev(SplitTmp, ":")))       '（*:[*]）
+                
+                '如果没有对应的代码窗口就创建一个新的，有的话就切换过去。这部分代码和frmSolutionExplorer的SolutionTreeView_DoubleClick相似
+                '以防万一：有时候获取断点对应的gdb断点的时候会出错，导致GdbBreakpoints的映射有缺漏。这样会导致创建一个无效的代码窗口
+                If BreakpointIndex <= UBound(GdbBreakpoints) Then
+                    With CurrentProject.Files(GdbBreakpoints(BreakpointIndex).FileIndex)
+                        If .TargetWindow Is Nothing Then
+                            Dim NewCodeWindow   As frmCodeWindow
+                            Dim FileData        As String
+                            Dim tmpData         As String
+                            
+                            Set NewCodeWindow = CreateNewCodeWindow(GdbBreakpoints(BreakpointIndex).FileIndex)  '创建新的代码窗体并设置绑定的文件序号
+                            NewCodeWindow.Caption = GetFileName(.FilePath)
+                            
+                            Err.Clear
+                            Open .FilePath For Input As #1                                                      '尝试打开对应的代码文件
+                                If Err.Number <> 0 Then
+                                    Close #1
+                                    NoSkinMsgBox Lang_Main_Debug_OpenSourceFailure & .FilePath, vbExclamation, Lang_Msgbox_Error
+                                Else
+                                    Do While Not EOF(1)
+                                        Line Input #1, tmpData
+                                        FileData = FileData & tmpData & vbCrLf
+                                    Loop
+                                End If
+                            Close #1
+                            
+                            Me.TabBar.AddForm NewCodeWindow
+                        Else
+                            frmMain.TabBar.SwitchToByForm .TargetWindow                                         '切换到对应的代码窗体
+                        End If
+                        .TargetWindow.SyntaxEdit.CurrPos.Row = SourceLn                                     '跳转到对应的代码行
+                        .TargetWindow.BreakLine = SourceLn
+                        .TargetWindow.SyntaxEdit.SetFocus
+                        .TargetWindow.RedrawBreakpoints                                                 '绘制中断行的小箭头
+                    End With
+                End If
+                frmOutput.OutputLog Lang_Main_Debug_BreakpointHit & ": " & _
+                    CurrentProject.Files(GdbBreakpoints(BreakpointIndex).FileIndex).FilePath & ":" & SourceLn
+                
+                '获取各种调试信息
+                Call frmCallStack.GetCallStack                                                  '获取调用堆栈
+                Call frmLocals.GetLocals                                                        '获取本地变量
+            '======================================================================================================================
+            
+            ElseIf PipeOutput Like "[[]Inferior * exited *" Then                            '进程退出信息（[Inferior * (process *) exited *]）（新版gdb）
+                SplitTmp = Right(PipeOutput, Len(PipeOutput) - InStrRev(PipeOutput, " exited ") - 7)    '（[Inferior * (process *) exited 【*]】）
+                SplitTmp = Left(SplitTmp, InStrRev(SplitTmp, "]") - 1)                                  '（【*】]）
+                
+                If SplitTmp = "normally" Then                                                   '程序正常结束，返回0
+                    ExitCode = 0
+                Else                                                                            '否则就把返回值（八进制）转成十进制
+                    ExitCode = CLng("&O" & Right(SplitTmp, Len(SplitTmp) - InStrRev(SplitTmp, " ")))
+                End If
+                Call ProcessExitedHandler(ExitCode)
+            
+            '======================================================================================================================
+            ElseIf PipeOutput Like "Program exited *" Then                                  '进程退出消息（Program exited *.）（旧版gdb）
+                SplitTmp = Right(PipeOutput, Len(PipeOutput) - InStrRev(PipeOutput, " "))       '（Program exited with code [*.]）或（Program exited [normally.]）
+                SplitTmp = Left(SplitTmp, Len(SplitTmp) - 1)                                    '（[*].）或（[normally].）
+                
+                If SplitTmp = "normally" Then                                                   '程序正常结束，返回0
+                    ExitCode = 0
+                Else                                                                            '否则就把返回值（八进制）转成十进制
+                    ExitCode = CLng("&O" & SplitTmp)
+                End If
+                Call ProcessExitedHandler(ExitCode)
+            End If
+        Next i
+    Else
+        Me.tmrCheckProcess.Enabled = False
+        MsgBox "gdb BOOMED!"
+    End If
+End Sub
